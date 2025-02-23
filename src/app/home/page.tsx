@@ -1,8 +1,6 @@
-import React, { FC } from "react";
+import React from "react";
 
-interface IProps {}
-
-const page: FC<IProps> = (props) => {
+const page = () => {
   return <div className="">Welcome to Home Page</div>;
 };
 
