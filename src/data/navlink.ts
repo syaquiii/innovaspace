@@ -1,4 +1,4 @@
-import Tnavlink from "../type/Tnavlink";
+import Tnavlink from "@/type/Tnavlink";
 
 export const navlink: Tnavlink[] = [
   {

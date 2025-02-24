@@ -1,6 +1,6 @@
 "use client";
 
-import { navlink } from "@/app/data/navlink";
+import { navlink } from "@/data/navlink";
 import Hamburger from "hamburger-react";
 import React from "react";
 
