@@ -10,7 +10,7 @@ const Hero = () => {
         <h1 className="font-bold  text-[8vh] md:text-[16vh] absolute right-0 md:right-0 bottom-0">
           Space
         </h1>
-        <h4 className="md:w-[45vh] w-[22vh] text-[1.5vh] text-right -left-10 bottom-8 md:bottom-[8vh] absolute font-semibold md:-left-24 md:text-[3vh]">
+        <h4 className="md:w-[45vh] w-[22vh] text-[1.5vh] text-right -left-6 bottom-6 md:bottom-[8vh] absolute font-semibold md:-left-[14vh] md:text-[3vh]">
           Find your space and innovate
         </h4>
       </div>

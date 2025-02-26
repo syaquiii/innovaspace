@@ -4,7 +4,7 @@ import { Instagram, Mail, Phone } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-light-default lg:-mt-20 rounded-t-3xl">
+    <footer className="bg-light-default lg rounded-t-3xl">
       <div className="mycontainer gap-y-14  flex flex-col  lg:flex-row lg:justify-between py-24 ">
         <div className="flex gap-4  justify-center lg:gap-8  ">
           <img className="aspect-square w-24 h-24  bg-black rounded-lg" />
