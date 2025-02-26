@@ -27,7 +27,6 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
-        <div className="h-[35rem] bg-ourblack"></div>
         <Footer />
       </body>
     </html>

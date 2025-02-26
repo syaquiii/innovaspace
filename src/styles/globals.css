@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .mycontainer {
-  @apply container mx-auto lg:mt-12 px-4  xl:px-32;
+  @apply container mx-auto  px-4  xl:px-32;
 }
 
 .bg-home {
