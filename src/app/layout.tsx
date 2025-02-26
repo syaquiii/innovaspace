@@ -22,10 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins} container mx-auto lg:mt-12 px-4 lg:px-12 antialiased`}
+        className={`${poppins.variable} font-poppins  container mx-auto lg:mt-12 px-4 lg:px-12 antialiased`}
       >
         <Navbar />
-        <h1 className="">NORMAL</h1>
         {children}
       </body>
     </html>

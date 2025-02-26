@@ -33,7 +33,7 @@ export default {
         },
       },
       fontFamily: {
-        poppins: [],
+        poppins: ["var(--font-poppins)"],
       },
     },
   },
