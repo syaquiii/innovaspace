@@ -1,6 +1,8 @@
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+
 type Tsubslist = {
   id: number;
-  icon: object;
+  icon: string | StaticImport;
   title: string;
   content: string;
 };
