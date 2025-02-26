@@ -4,6 +4,7 @@ import { navlink } from "@/data/navlink";
 import Hamburger from "hamburger-react";
 import React from "react";
 import Logo from "./ui/Logo";
+import { Button } from "./ui/Button";
 
 const Navbar = () => {
   return (
@@ -15,9 +16,9 @@ const Navbar = () => {
             <ul key={item.id}>{item.title}</ul>
           ))}
         </ul>
-        <button className="px-4 py-2 bg-normal-default text-light-default rounded-xl">
+        <Button variant="normal" size="normal">
           Masuk
-        </button>
+        </Button>
       </div>
       <div className="lg:hidden ">
         <Hamburger />
