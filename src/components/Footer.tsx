@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="bg-light-default  rounded-t-3xl">
       <div className="mycontainer gap-y-14  flex flex-col  lg:flex-row lg:justify-between py-24 ">
-        <div className="flex gap-8  px-10 lg:px-0  ">
+        <div className="flex gap-8  ">
           <img className="aspect-square w-24 h-24  bg-black rounded-lg" />
           <div className=" flex justify-center gap-y-2 flex-col">
             <Logo size="large" />
