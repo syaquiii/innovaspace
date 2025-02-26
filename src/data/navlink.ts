@@ -3,23 +3,23 @@ import Tnavlink from "@/type/Tnavlink";
 export const navlink: Tnavlink[] = [
   {
     id: 1,
-    title: "Home",
+    title: "Beranda",
     url: "/home",
   },
   {
     id: 2,
-    title: "About",
-    url: "/about",
+    title: "Kelas",
+    url: "/kelas",
   },
   {
     id: 3,
-    title: "Contact",
-    url: "/contact",
+    title: "Mentor",
+    url: "/mentor",
   },
   {
     id: 4,
-    title: "lorem",
-    url: "/lorem",
+    title: "Diskusi",
+    url: "/diskusi",
   },
-  { id: 5, title: "lorem", url: "/lorem" },
+  { id: 5, title: "Market", url: "/market" },
 ];
