@@ -31,6 +31,7 @@ export default {
         darker: {
           default: "#122e58",
         },
+        ourblack: "#101010",
       },
       fontFamily: {
         poppins: ["var(--font-poppins)"],

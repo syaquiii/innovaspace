@@ -22,10 +22,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} font-poppins   antialiased`}>
+      <body
+        className={`${poppins.variable} font-poppins relative  -mt-4 antialiased`}
+      >
         <Navbar />
         {children}
-        <div className="h-[35rem] "></div>
+        <div className="h-[35rem] bg-ourblack"></div>
         <Footer />
       </body>
     </html>

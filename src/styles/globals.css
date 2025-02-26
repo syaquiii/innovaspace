@@ -5,3 +5,7 @@
 .mycontainer {
   @apply container mx-auto lg:mt-12 px-4  lg:px-14 xl:px-32;
 }
+
+.bg-home {
+  @apply bg-[url(../assets/img/herobg.png)] bg-no-repeat h-[100svh] bg-cover bg-bottom;
+}
