@@ -6,11 +6,11 @@ const Footer = () => {
   return (
     <footer className="bg-light-default lg:-mt-20 rounded-t-3xl">
       <div className="mycontainer gap-y-14  flex flex-col  lg:flex-row lg:justify-between py-24 ">
-        <div className="flex gap-8  ">
+        <div className="flex gap-4  justify-center lg:gap-8  ">
           <img className="aspect-square w-24 h-24  bg-black rounded-lg" />
           <div className=" flex justify-center gap-y-2 flex-col">
             <Logo size="large" />
-            <span className="text-xs lg:text-lg">
+            <span className="text-xs  lg:text-lg">
               Find your space and innovate
             </span>
           </div>
