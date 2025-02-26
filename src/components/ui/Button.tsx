@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { ButtonHTMLAttributes, FC } from "react";
+import { ButtonHTMLAttributes } from "react";
 import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/utils/util";
 
@@ -36,4 +36,5 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
+Button.displayName = "Button";
 export { Button, buttonVariants };
