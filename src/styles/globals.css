@@ -25,3 +25,7 @@
 .layanan4 {
   @apply bg-[url(../assets/img/layanan4.png)] bg-no-repeat bg-cover;
 }
+
+.bg-langganan {
+  @apply bg-[url(../assets/img/langgananbg.png)] bg-no-repeat bg-cover;
+}

@@ -3,7 +3,7 @@ import React from "react";
 const About = () => {
   return (
     <div className="bg-ourblack -mt-2">
-      <div className=" min-h-[20rem] lg:min-h-[30rem] text-white items-center gap-6 flex flex-col py-20 justify center mycontainer">
+      <div className="min-h-[40rem] lg:min-h-[30rem] text-white items-center gap-6 flex flex-col py-20 justify center mycontainer">
         <h2 className="text-5xl  lg:text-6xl  font-bold  w-full text-center">
           Tentang Kami
         </h2>
