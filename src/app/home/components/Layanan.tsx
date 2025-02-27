@@ -2,7 +2,7 @@ import React from "react";
 
 const Layanan = () => {
   return (
-    <div className="bg-ourblack -mt-10">
+    <div className="bg-ourblack ">
       <div className="mycontainer h-fit pb-32 lg:flex justify-between gap-x-10 text-white">
         <div>
           <h2 className="text-6xl font-bold ">Layanan</h2>
