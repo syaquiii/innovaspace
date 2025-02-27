@@ -7,6 +7,7 @@ import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
 import { redirect } from "next/navigation";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -34,7 +35,11 @@ const Navbar = () => {
     };
   }, []);
 
-  if (pathname === "/login" || pathname === "/register") {
+  if (
+    pathname === "/login" ||
+    pathname === "/register" ||
+    pathname === "/forget"
+  ) {
     return null;
   }
 
@@ -60,13 +65,11 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <Button
-          onClick={() => redirect("/login")}
-          variant="normal"
-          size="normal"
-        >
-          Masuk
-        </Button>
+        <Link href="/login">
+          <Button variant="normal" size="normal">
+            Masuk
+          </Button>
+        </Link>
       </div>
       <div className="lg:hidden m-4 text-white fixed">
         <Hamburger />

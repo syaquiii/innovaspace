@@ -5,7 +5,8 @@ import { cn } from "@/utils/util";
 const inputVariants = cva("w-full rounded-lg", {
   variants: {
     variant: {
-      normal: "bg-light-default px-10 py-3",
+      normal:
+        "bg-light-default lg:px-4 lg:text-xs xl:px-10 xl:text-lg px-10 py-3",
     },
   },
   defaultVariants: {

@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/InputField";
 import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -13,7 +13,26 @@ const LoginForm = () => {
   }, []);
 
   return (
-    <form className="flex flex-col gap-y-6">
+    <form className="flex  flex-col gap-y-6">
+      <div className="flex flex-col gap-2">
+        <label htmlFor="fullname" className="font-bold">
+          Fullname
+        </label>
+        <div className="flex  lg:flex-row  gap-y-4 gap-x-2 w-full flex-col justify-between ">
+          <Input
+            name="firstname"
+            placeholder="firstname"
+            type="text"
+            ref={inputRef}
+          />
+          <Input
+            name="lastname"
+            placeholder="lastname"
+            type="text"
+            ref={inputRef}
+          />
+        </div>
+      </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="font-bold text-lg ">
           Email
@@ -30,9 +49,6 @@ const LoginForm = () => {
           <label htmlFor="password" className="font-bold text-lg ">
             Password
           </label>
-          <Link className="font-normal text-normal-default" href="/forget">
-            forget password?
-          </Link>
         </div>
         <Input
           name="password"
@@ -42,8 +58,10 @@ const LoginForm = () => {
         />
       </div>
       <div className="flex justify-start gap-2">
-        <Input className="w-4 h-4" type="checkbox" />
-        <label htmlFor="remember-me">remember me</label>
+        <span className="text-slate-500">
+          Dengan mendaftar, Anda menyetujui Syarat & Ketentuan serta Kebijakan
+          Privasi dari Innova Space.
+        </span>
       </div>
       <Button variant="normal" size="lg">
         Login
@@ -52,4 +70,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

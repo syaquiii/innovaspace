@@ -5,7 +5,7 @@ const AuthAbout = () => {
   return (
     <div className="mycontainer">
       <Image alt=" " src={AuthAboutImg} />
-      <h4 className="mt-10">
+      <h4 className="mt-10 text-center">
         Innova Space – Tempat di mana belajar jadi lebih fleksibel, berkembang
         jadi lebih mudah, dan kesempatan baru selalu menanti! 🚀✨
       </h4>
