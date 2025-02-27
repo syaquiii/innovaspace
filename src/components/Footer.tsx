@@ -5,15 +5,12 @@ import { Instagram, Mail, Phone } from "lucide-react";
 const Footer = () => {
   return (
     <footer className="bg-light-default lg rounded-t-3xl">
-      <div className="mycontainer gap-y-14  flex flex-col  lg:flex-row lg:justify-between py-24 ">
-        <div className="flex gap-4  justify-center lg:gap-8  ">
-          <img className="aspect-square w-24 h-24  bg-black rounded-lg" />
-          <div className=" flex justify-center gap-y-2 flex-col">
-            <Logo size="large" />
-            <span className="text-xs  lg:text-lg">
-              Find your space and innovate
-            </span>
-          </div>
+      <div className="mycontainer gap-y-14 lg:items-center flex flex-col  lg:flex-row lg:justify-between py-24 ">
+        <div className=" gap-4  items-center  justify-center lg:gap-8  ">
+          <Logo size="large" style="dark" className="mb-2" />
+          <span className="text-xs  lg:text-lg ">
+            Find your space and innovate
+          </span>
         </div>
         <ul className="flex  flex-col gap-3">
           <li className="flex justify-center lg:justify-end gap-2">

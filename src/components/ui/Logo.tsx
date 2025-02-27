@@ -1,19 +1,23 @@
 import React, { forwardRef } from "react";
 import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/utils/util";
+import Image from "next/image";
+import LogoDark from "@/assets/img/icon/logodark.svg";
+import LogoWhite from "@/assets/img/icon/logowhite.svg";
 
-const logoVariants = cva("font-semibold relative  flex ", {
+const logoVariants = cva(" relative  aspect-auto   ", {
   variants: {
     style: {
-      normal: "text-black",
+      white: "",
+      dark: "",
     },
     size: {
-      normal: "w-24 h-11 text-lg",
-      large: "w-44 h-[4.5rem] text-4xl ",
+      normal: "w-24",
+      large: "w-64",
     },
   },
   defaultVariants: {
-    style: "normal",
+    style: "white",
     size: "normal",
   },
 });
@@ -30,8 +34,7 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
         ref={ref}
         {...props}
       >
-        <h1 className="absolute">Innova</h1>
-        <h1 className="absolute bottom-0 right-1">Space</h1>
+        <Image alt=" " src={style === "dark" ? LogoDark : LogoWhite} />
       </div>
     );
   }

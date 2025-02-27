@@ -38,7 +38,7 @@ const Navbar = () => {
       } transition-all  duration-300 fixed flex z-10 justify-end lg:justify-center   w-full mt-4 lg:mt-0`}
     >
       <div className="hidden fixed lg:w-full xl:w-[70rem] mycontainer mt-10 font-semibold lg:text-md xl:text-xl bg-light-default lg:flex justify-between h-20 rounded-3xl lg:px-8 items-center">
-        <Logo size="normal" />
+        <Logo size="normal" style="dark" />
         <ul className="flex lg:gap-8 xl:gap-16">
           {navlink.map((item) => (
             <li key={item.id}>{item.title}</li>
