@@ -5,7 +5,6 @@ import Hamburger from "hamburger-react";
 import React, { useState, useEffect, useRef } from "react";
 import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
-import { redirect } from "next/navigation";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
