@@ -2,26 +2,29 @@
 
 import { navlink } from "@/data/navlink";
 import Hamburger from "hamburger-react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
+import { redirect } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+  const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
-  let lastScrollY = 0;
+  const lastScrollY = useRef(0);
 
   const handleScroll = () => {
-    if (window.scrollY > lastScrollY) {
+    if (window.scrollY > lastScrollY.current) {
       setIsVisible(false);
     } else {
       setIsVisible(true);
     }
-    lastScrollY = window.scrollY;
+    lastScrollY.current = window.scrollY;
   };
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      lastScrollY = window.scrollY;
+      lastScrollY.current = window.scrollY;
       window.addEventListener("scroll", handleScroll);
     }
     return () => {
@@ -31,20 +34,37 @@ const Navbar = () => {
     };
   }, []);
 
+  if (pathname === "/login" || pathname === "/register") {
+    return null;
+  }
+
   return (
     <nav
       className={`${
         isVisible ? "top-0" : "opacity-0 -top-20"
-      } transition-all  duration-300 fixed flex z-10 justify-end lg:justify-center   w-full mt-4 lg:mt-0`}
+      } transition-all duration-300 fixed flex z-10 justify-end lg:justify-center w-full mt-4 lg:mt-0`}
     >
       <div className="hidden fixed lg:w-full xl:w-[70rem] mycontainer mt-10 font-semibold lg:text-md xl:text-xl bg-light-default lg:flex justify-between h-20 rounded-3xl lg:px-8 items-center">
         <Logo size="normal" style="dark" />
         <ul className="flex lg:gap-8 xl:gap-16">
           {navlink.map((item) => (
-            <li key={item.id}>{item.title}</li>
+            <li
+              className={
+                pathname === item.url || pathname.startsWith(item.url)
+                  ? "text-normal-default animate-pulse font-bold"
+                  : "text-black"
+              }
+              key={item.id}
+            >
+              <a href={item.url}>{item.title}</a>
+            </li>
           ))}
         </ul>
-        <Button variant="normal" size="normal">
+        <Button
+          onClick={() => redirect("/login")}
+          variant="normal"
+          size="normal"
+        >
           Masuk
         </Button>
       </div>
