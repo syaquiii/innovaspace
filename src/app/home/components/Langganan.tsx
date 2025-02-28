@@ -10,7 +10,7 @@ const Langganan: React.FC = () => {
   return (
     <div className="bg-langganan h-fit">
       <div className="mycontainer lg:py-28 py-24">
-        <div className=" px-16">
+        <div className=" lg:px-16">
           <h2 className="lg:text-6xl text-4xl font-bold text-right">
             Be a part of <span className="text-normal-default">innovation</span>
             .
