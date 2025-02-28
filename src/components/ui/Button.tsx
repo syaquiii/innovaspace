@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes } from "react";
 import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/utils/util";
 
-const buttonVariants = cva("rounded-xl", {
+const buttonVariants = cva("rounded-xl active:scale-95 transition-all", {
   variants: {
     variant: {
       normal: "bg-normal-default text-light-default hover:bg-normal-hover",
@@ -11,7 +11,7 @@ const buttonVariants = cva("rounded-xl", {
     },
     size: {
       normal: "px-4 py-2",
-      lg: "py-4 px- 8",
+      lg: "py-4 px-16",
     },
   },
   defaultVariants: {

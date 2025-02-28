@@ -66,7 +66,7 @@ const Navbar = () => {
             ))}
           </ul>
           <Link href={"/login"}>
-            <Button className="w-full mt-4" size="lg">
+            <Button className="mt-4" variant="normal" size="lg">
               Masuk
             </Button>
           </Link>
@@ -105,8 +105,13 @@ const Navbar = () => {
           </Button>
         </Link>
       </div>
-      <div className="lg:hidden m-4 text-white fixed">
+      <div
+        className={` lg:hidden m-4 rounded-lg ${
+          isOpen ? "bg-light-default" : "bg-normal-default"
+        } text-white fixed`}
+      >
         <Hamburger
+          size={24}
           color={isOpen ? "black" : "white"}
           toggled={isOpen}
           toggle={setOpen}

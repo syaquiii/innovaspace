@@ -13,7 +13,7 @@ const page = () => {
       </span>
       <LoginForm />
       <div className="w-full justify-center flex gap-2">
-        <span className="">Don`t have an account yet?</span>
+        <span className="">Dont have an account yet?</span>
         <Link className="text-normal-default" href="/register">
           register
         </Link>

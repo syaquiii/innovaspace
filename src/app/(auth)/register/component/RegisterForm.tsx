@@ -63,7 +63,7 @@ const RegisterForm = () => {
         </span>
       </div>
       <Button variant="normal" size="lg">
-        Login
+        Register
       </Button>
     </form>
   );
