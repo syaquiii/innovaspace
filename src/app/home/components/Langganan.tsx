@@ -1,7 +1,10 @@
+"use client";
 import React from "react";
 import { Subslist } from "@/data/sublist";
-import SubscriptionCard from "./SubscriptionCard";
 import Tsubslist from "@/type/Tsubslist";
+import { Button } from "@/components/ui/Button";
+import Link from "next/link";
+import SubscriptionCard from "@/components/ui/SubscriptionCard";
 
 const Langganan: React.FC = () => {
   return (
@@ -23,6 +26,11 @@ const Langganan: React.FC = () => {
             <h2 className="font-bold text-4xl lg:text-6xl">Subsc</h2>
             <h2 className="font-bold text-4xl lg:text-6xl">ription</h2>
           </div>
+        </div>
+        <div className="w-full flex justify-center mt-10 lg:mt-20">
+          <Link href={"/langganan"}>
+            <Button size={"lg"}>Langganan sekarang</Button>
+          </Link>
         </div>
       </div>
     </div>
