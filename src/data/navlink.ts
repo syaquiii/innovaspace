@@ -21,5 +21,4 @@ export const navlink: Tnavlink[] = [
     title: "Diskusi",
     url: "/diskusi",
   },
-  { id: 5, title: "Market", url: "/market" },
 ];

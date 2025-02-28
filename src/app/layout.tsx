@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} font-poppins relative `}>
+      <body className={`${poppins.variable}  font-poppins relative `}>
         <Navbar />
         {children}
         <Footer />
