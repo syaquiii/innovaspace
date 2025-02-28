@@ -51,7 +51,7 @@ const Navbar = () => {
           "bg-black bg-opacity-35 flex justify-end -mt-4 w-full h-screen"
         }`}
       >
-        <div className={`w-2/3  px-10 py-20 h-[100vh] bg-light-default `}>
+        <div className={`w-2/3  px-10 py-20 h-[100vh]  bg-light-default `}>
           <ul className="flex gap-6 font-bold text-xl  flex-col">
             {navlink.map((item) => (
               <li
@@ -84,7 +84,7 @@ const Navbar = () => {
     >
       {isOpen && MobileNavbar()}
 
-      <div className="hidden fixed lg:w-full xl:w-[70rem] mycontainer mt-10 font-semibold lg:text-md xl:text-xl bg-light-default lg:flex justify-between h-20 rounded-3xl lg:px-8 items-center">
+      <div className="hidden fixed lg:w-full xl:w-[70rem] mycontainer mt-10 font-semibold lg:text-md xl:text-xl bg-light-default  lg:flex justify-between h-20 rounded-3xl lg:px-8 items-center">
         <Logo size="normal" style="dark" />
         <ul className="flex lg:gap-8 xl:gap-16">
           {navlink.map((item) => (
