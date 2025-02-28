@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/InputField";
-import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 
 const RegisterForm = () => {

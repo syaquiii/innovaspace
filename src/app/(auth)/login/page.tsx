@@ -12,12 +12,12 @@ const page = () => {
         Find your space and innovate with Innova Space!
       </span>
       <LoginForm />
-      <span className="text-center">
-        Don't have an account yet?{" "}
+      <div className="w-full justify-center flex gap-2">
+        <span className="">Dont have an account yet?</span>
         <Link className="text-normal-default" href="/register">
           register
         </Link>
-      </span>
+      </div>
     </div>
   );
 };

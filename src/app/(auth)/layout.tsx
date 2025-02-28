@@ -1,5 +1,4 @@
 import AuthAbout from "@/components/AuthAbout";
-import Link from "next/link";
 
 export default function RootLayout({
   children,
