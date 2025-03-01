@@ -10,9 +10,9 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { UserRound } from "lucide-react";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const pathname = usePathname();
-  const token = Cookies.get("token");
+  const [token, setToken] = useState<string | null>(null);
   const [isOpen, setOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
@@ -27,6 +27,9 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    const fetchedToken = Cookies.get("token");
+    setToken(fetchedToken || null);
+
     if (typeof window !== "undefined") {
       lastScrollY.current = window.scrollY;
       window.addEventListener("scroll", handleScroll);
@@ -46,40 +49,38 @@ const Navbar = () => {
     return null;
   }
 
-  const MobileNavbar = () => {
-    return (
-      <div
-        className={`${
-          isOpen &&
-          "bg-black bg-opacity-35 flex justify-end -mt-4 w-full h-screen"
-        }`}
-      >
-        <div className={`w-2/3 px-10 py-20 h-[100vh] bg-light-default`}>
-          <ul className="flex gap-6 font-bold text-xl flex-col">
-            {navlink.map((item) => (
-              <li
-                className={
-                  pathname === item.url || pathname.startsWith(item.url)
-                    ? "text-normal-default animate-pulse font-bold"
-                    : "text-black"
-                }
-                key={item.id}
-              >
-                <a href={item.url}>{item.title}</a>
-              </li>
-            ))}
-          </ul>
-          {!token && (
-            <Link href={"/login"}>
-              <Button className="mt-4 px-8" variant="normal" size="normal">
-                Masuk
-              </Button>
-            </Link>
-          )}
-        </div>
+  const MobileNavbar = () => (
+    <div
+      className={`${
+        isOpen &&
+        "bg-black bg-opacity-35 flex justify-end -mt-4 w-full h-screen"
+      }`}
+    >
+      <div className={`w-2/3 px-10 py-20 h-[100vh] bg-light-default`}>
+        <ul className="flex gap-6 font-bold text-xl flex-col">
+          {navlink.map((item) => (
+            <li
+              className={
+                pathname === item.url || pathname.startsWith(item.url)
+                  ? "text-normal-default animate-pulse font-bold"
+                  : "text-black"
+              }
+              key={item.id}
+            >
+              <a href={item.url}>{item.title}</a>
+            </li>
+          ))}
+        </ul>
+        {!token && (
+          <Link href={"/login"}>
+            <Button className="mt-4 px-8" variant="normal" size="normal">
+              Masuk
+            </Button>
+          </Link>
+        )}
       </div>
-    );
-  };
+    </div>
+  );
 
   return (
     <nav
@@ -87,7 +88,7 @@ const Navbar = () => {
         isVisible ? "top-0" : "opacity-0 -top-20"
       } transition-all duration-300 fixed flex z-10 justify-end lg:justify-center w-full mt-4 lg:mt-0`}
     >
-      {isOpen && MobileNavbar()}
+      {isOpen && <MobileNavbar />}
 
       <div className="hidden fixed lg:w-full xl:w-[70rem] mycontainer mt-10 font-semibold lg:text-md xl:text-xl bg-light-default lg:flex justify-between h-20 rounded-3xl lg:px-8 items-center">
         <Logo size="normal" style="dark" />
