@@ -6,11 +6,11 @@ export default function ProfileLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <section className="min-h-screen mycontainer lg:pt-40 bg-langganan">
-      <div>
+    <section className="min-h-screen lg:pt-40 pt-24 bg-langganan">
+      <div className=" mycontainer">
         <Profile />
       </div>
-      <div>{children}</div>
+      <div className=" mycontainer">{children}</div>
     </section>
   );
 }
