@@ -1,15 +1,18 @@
 "use client";
 
 import { navlink } from "@/data/navlink";
+import Cookies from "js-cookie";
 import Hamburger from "hamburger-react";
 import React, { useState, useEffect, useRef } from "react";
 import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { UserRound } from "lucide-react";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const token = Cookies.get("token");
   const [isOpen, setOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
@@ -51,8 +54,8 @@ const Navbar = () => {
           "bg-black bg-opacity-35 flex justify-end -mt-4 w-full h-screen"
         }`}
       >
-        <div className={`w-2/3  px-10 py-20 h-[100vh]  bg-light-default `}>
-          <ul className="flex gap-6 font-bold text-xl  flex-col">
+        <div className={`w-2/3 px-10 py-20 h-[100vh] bg-light-default`}>
+          <ul className="flex gap-6 font-bold text-xl flex-col">
             {navlink.map((item) => (
               <li
                 className={
@@ -66,11 +69,13 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <Link href={"/login"}>
-            <Button className="mt-4 px-8" variant="normal" size="normal">
-              Masuk
-            </Button>
-          </Link>
+          {!token && (
+            <Link href={"/login"}>
+              <Button className="mt-4 px-8" variant="normal" size="normal">
+                Masuk
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     );
@@ -84,7 +89,7 @@ const Navbar = () => {
     >
       {isOpen && MobileNavbar()}
 
-      <div className="hidden fixed lg:w-full xl:w-[70rem] mycontainer mt-10 font-semibold lg:text-md xl:text-xl bg-light-default  lg:flex justify-between h-20 rounded-3xl lg:px-8 items-center">
+      <div className="hidden fixed lg:w-full xl:w-[70rem] mycontainer mt-10 font-semibold lg:text-md xl:text-xl bg-light-default lg:flex justify-between h-20 rounded-3xl lg:px-8 items-center">
         <Logo size="normal" style="dark" />
         <ul className="flex lg:gap-8 xl:gap-16">
           {navlink.map((item) => (
@@ -100,14 +105,22 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <Link href="/login">
-          <Button variant="normal" size="normal">
-            Masuk
-          </Button>
-        </Link>
+        {!token ? (
+          <Link href="/login">
+            <Button variant="normal" size="normal">
+              Masuk
+            </Button>
+          </Link>
+        ) : (
+          <Link href="/profile">
+            <span className="bg-white aspect-square w-10 shadow-xl rounded-full flex justify-center items-center">
+              <UserRound className="text-normal-default" />
+            </span>
+          </Link>
+        )}
       </div>
       <div
-        className={` lg:hidden m-4 rounded-lg ${
+        className={`lg:hidden m-4 rounded-lg ${
           isOpen ? "bg-opacity-0" : "bg-normal-default"
         } text-white fixed`}
       >

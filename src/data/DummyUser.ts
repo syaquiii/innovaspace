@@ -4,8 +4,8 @@ export const DummyUser: DummyUserType = {
   user: {
     id: 1,
     username: "johndoe",
-    email: "johndoe@example.com",
-    password: "Password123!",
+    email: "dummy@mail.com",
+    password: "dummydummy",
     firstName: "John",
     lastName: "Doe",
   },
