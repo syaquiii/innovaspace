@@ -1,3 +1,10 @@
+export type TUserProfile = {
+  kelasku: { title: string; progressPercentage: number }[];
+  pencapaian: { achievement: string }[];
+  mentorku: { currentMentor: string };
+  riwayatPembayaran: { latestCheckout: string };
+};
+
 export type TUser = {
   id: number;
   username: string;
@@ -6,6 +13,7 @@ export type TUser = {
   passwordHash: string;
   firstName: string;
   lastName: string;
+  userProfile: TUserProfile;
 };
 
 export type DummyUserType = {
