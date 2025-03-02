@@ -4,10 +4,10 @@ const DummyUser: DummyUserType = {
   user: {
     id: 1,
     username: "dummyuser",
-    email: "dummyuser@example.com",
+    email: "dummy@mail.com",
     password: "dummydummy",
     passwordHash:
-      "$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36mX2Mwa1P4R/WF4tga3x06", // hashed password
+      "$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36mX2Mwa1P4R/WF4tga3x06",
     firstName: "Dummy",
     lastName: "User",
   },

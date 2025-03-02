@@ -1,7 +1,6 @@
 import DummyUser from "@/data/DummyUser";
 import Cookies from "js-cookie";
 import { redirect } from "next/navigation";
-import bcrypt from "bcryptjs";
 
 export const handleLogin = async (
   email: string,
@@ -11,8 +10,10 @@ export const handleLogin = async (
 ) => {
   const { user } = DummyUser;
 
-  const passwordMatch = await bcrypt.compare(password, user.passwordHash);
+  // WILL USE BCRYPT NEXT VERSION IF THE API FOR REGISTERING IS DONE
+  const passwordMatch = password === user.password;
 
+  console.log(passwordMatch);
   if (email === user.email && passwordMatch) {
     setError("");
 
