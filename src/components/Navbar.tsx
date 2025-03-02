@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
             </Button>
           </Link>
         ) : (
-          <Profile />
+          <Profile hasbuttonToProfile={true} />
         )}
       </div>
     </div>
