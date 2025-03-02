@@ -1,4 +1,5 @@
-import DummyUser from "@/data/DummyUser";
+import { dummyData } from "@/data/DummyData";
+import { Tuser } from "@/type/TDummyData";
 import Cookies from "js-cookie";
 import { redirect } from "next/navigation";
 
@@ -8,7 +9,7 @@ export const handleLogin = async (
   rememberMe: boolean,
   setError: (error: string) => void
 ) => {
-  const { user } = DummyUser;
+  const user: Tuser = dummyData.user[0];
 
   // WILL USE BCRYPT NEXT VERSION IF THE API FOR REGISTERING IS DONE
   const passwordMatch = password === user.password;
@@ -29,7 +30,6 @@ export const handleLogin = async (
     } else {
       localStorage.removeItem("rememberMe");
     }
-
     redirect("/home");
   } else {
     setError("Invalid email or password");

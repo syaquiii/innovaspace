@@ -1,7 +1,8 @@
 {
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#48240A",
-        "titleBar.activeBackground": "#65330F",
-        "titleBar.activeForeground": "#FEFAF8"
-    }
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#48240A",
+    "titleBar.activeBackground": "#65330F",
+    "titleBar.activeForeground": "#FEFAF8"
+  },
+  "cSpell.words": ["Kelas"]
 }

@@ -3,6 +3,7 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import KelasKu from "../components/KelasKu";
+import MentorKu from "../components/MentorKu";
 const Page = () => {
   const pathname = usePathname();
 
@@ -10,6 +11,8 @@ const Page = () => {
     switch (pathname) {
       case "/profile/kelasku":
         return <KelasKu />;
+      case "/profile/mentorku":
+        return <MentorKu />;
       default:
         return <KelasKu />;
     }

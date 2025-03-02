@@ -10,6 +10,7 @@ import Link from "next/link";
 import { UserRound } from "lucide-react";
 import useToken from "@/hooks/useToken";
 import useScrollVisibility from "@/hooks/useScrollVisibility";
+import Profile from "@/app/profile/components/Profile";
 
 const Navbar: React.FC = () => {
   const pathname = usePathname();
@@ -32,7 +33,7 @@ const Navbar: React.FC = () => {
         "bg-black bg-opacity-35 flex justify-end -mt-4 w-full h-screen"
       }`}
     >
-      <div className={`w-2/3 px-10 py-20 h-[100vh] bg-light-default`}>
+      <div className={`w-2/3 px-10 py-20 h-[100vh]   bg-light-default`}>
         <ul className="flex gap-6 font-bold text-xl flex-col">
           {navlink.map((item) => (
             <li
@@ -47,12 +48,14 @@ const Navbar: React.FC = () => {
             </li>
           ))}
         </ul>
-        {!token && (
+        {!token ? (
           <Link href={"/login"}>
             <Button className="mt-4 px-8" variant="normal" size="normal">
               Masuk
             </Button>
           </Link>
+        ) : (
+          <Profile />
         )}
       </div>
     </div>
@@ -62,13 +65,13 @@ const Navbar: React.FC = () => {
     <nav
       className={`${
         isVisible ? "top-0" : "opacity-0 -top-20"
-      } transition-all duration-300 fixed flex z-10 justify-end lg:justify-center w-full mt-4 lg:mt-0`}
+      } transition-all duration-300 fixed flex z-10   justify-end  md:justify-center lg:justify-center w-full mt-4 lg:mt-0`}
     >
       {isOpen && <MobileNavbar />}
 
-      <div className="hidden fixed lg:w-full xl:w-[70rem] mycontainer mt-10 font-semibold lg:text-md xl:text-xl bg-light-default lg:flex justify-between h-20 rounded-3xl lg:px-8 items-center">
+      <div className="hidden fixed lg:w-full xl:w-[70rem]  md:w-full mycontainer mt-10 font-semibold md:text-md lg:text-md xl:text-xl bg-light-default md:flex justify-between h-20 rounded-3xl lg:px-8 items-center">
         <Logo size="normal" style="dark" />
-        <ul className="flex lg:gap-8 xl:gap-16">
+        <ul className="flex lg:gap-8 md:gap-4 xl:gap-16">
           {navlink.map((item) => (
             <li
               className={
@@ -97,7 +100,7 @@ const Navbar: React.FC = () => {
         )}
       </div>
       <div
-        className={`lg:hidden m-4 rounded-lg ${
+        className={`md:hidden m-4 rounded-lg ${
           isOpen ? "bg-opacity-0" : "bg-normal-default"
         } text-white fixed`}
       >

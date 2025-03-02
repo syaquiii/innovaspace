@@ -1,9 +1,13 @@
-import DummyUser from "@/data/DummyUser";
-import React from "react";
+import React, { useContext } from "react";
 import KelaskuCard from "./KelaskuCard";
+import KelasContext from "@/context/KelasContext";
 
 const KelasKu = () => {
-  const dataKelasKu = DummyUser.user.userProfile.kelasku;
+  const context = useContext(KelasContext);
+  if (!context) {
+    throw new Error("ProgressContext must be used within a ProgressProvider");
+  }
+  const { dataKelasKu } = context;
   return (
     <div className="">
       <div className="flex flex-col gap-10">
