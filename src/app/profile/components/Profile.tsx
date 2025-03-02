@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Button";
-import { DummyUser } from "@/data/DummyUser";
+import DummyUser from "@/data/DummyUser";
 import React from "react";
 
 const Profile = () => {

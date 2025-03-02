@@ -3,64 +3,28 @@
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/InputField";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
-import { DummyUser } from "@/data/DummyUser";
-import { redirect } from "next/navigation";
-import Cookies from "js-cookie";
+import React, { useState } from "react";
+import useLoginForm from "@/hooks/useLoginForm";
+import useRememberMe from "@/hooks/useRememberMe";
+import { handleLogin } from "@/utils/handelogin";
 
-const LoginForm = () => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const [loginForm, setLoginForm] = useState({
-    email: "",
-    password: "",
-  });
-  const [error, setError] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
+const LoginForm: React.FC = () => {
+  const { loginForm, handleChange } = useLoginForm();
+  const { rememberMe, handleRememberMeChange } = useRememberMe();
+  const [error, setError] = useState<string>("");
 
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleRememberMeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRememberMe(e.target.checked);
-  };
-
-  const handleLogin = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const { user } = DummyUser;
-    if (
-      loginForm.email === user.email &&
-      loginForm.password === user.password
-    ) {
-      setError("");
-
-      Cookies.set("token", "dummyTokenValue", {
-        expires: 30,
-        path: "/",
-      });
-
-      if (rememberMe) {
-        localStorage.setItem("rememberMe", "true");
-      } else {
-        localStorage.removeItem("rememberMe");
-      }
-
-      redirect("/home");
-    } else {
-      setError("Invalid email or password");
-    }
+    await handleLogin(
+      loginForm.email,
+      loginForm.password,
+      rememberMe,
+      setError
+    );
   };
 
   return (
-    <form className="flex flex-col gap-y-6" onSubmit={handleLogin}>
+    <form className="flex flex-col gap-y-6" onSubmit={onSubmit}>
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="font-bold text-lg">
           Email
@@ -69,7 +33,6 @@ const LoginForm = () => {
           name="email"
           placeholder="youremail@gmail.com"
           type="text"
-          ref={inputRef}
           value={loginForm.email}
           onChange={handleChange}
         />

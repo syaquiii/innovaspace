@@ -1,45 +1,21 @@
 "use client";
 
 import { navlink } from "@/data/navlink";
-import Cookies from "js-cookie";
 import Hamburger from "hamburger-react";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Logo } from "./ui/Logo";
 import { Button } from "./ui/Button";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { UserRound } from "lucide-react";
+import useToken from "@/hooks/useToken";
+import useScrollVisibility from "@/hooks/useScrollVisibility";
 
 const Navbar: React.FC = () => {
   const pathname = usePathname();
-  const [token, setToken] = useState<string | null>(null);
+  const token = useToken();
+  const isVisible = useScrollVisibility();
   const [isOpen, setOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const lastScrollY = useRef(0);
-
-  const handleScroll = () => {
-    if (window.scrollY > lastScrollY.current) {
-      setIsVisible(false);
-    } else {
-      setIsVisible(true);
-    }
-    lastScrollY.current = window.scrollY;
-  };
-
-  useEffect(() => {
-    const fetchedToken = Cookies.get("token");
-    setToken(fetchedToken || null);
-
-    if (typeof window !== "undefined") {
-      lastScrollY.current = window.scrollY;
-      window.addEventListener("scroll", handleScroll);
-    }
-    return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
 
   if (
     pathname === "/login" ||

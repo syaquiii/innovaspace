@@ -1,12 +1,16 @@
-import DummyUserType from "@/type/TDummyUser";
+import { DummyUserType } from "@/type/TDummyUser";
 
-export const DummyUser: DummyUserType = {
+const DummyUser: DummyUserType = {
   user: {
     id: 1,
-    username: "johndoe",
-    email: "dummy@mail.com",
+    username: "dummyuser",
+    email: "dummyuser@example.com",
     password: "dummydummy",
-    firstName: "John",
-    lastName: "Doe",
+    passwordHash:
+      "$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36mX2Mwa1P4R/WF4tga3x06", // hashed password
+    firstName: "Dummy",
+    lastName: "User",
   },
 };
+
+export default DummyUser;

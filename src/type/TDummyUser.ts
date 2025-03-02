@@ -1,14 +1,13 @@
-type TUser = {
+export type TUser = {
   id: number;
   username: string;
   email: string;
   password: string;
+  passwordHash: string;
   firstName: string;
   lastName: string;
 };
 
-type DummyUserType = {
+export type DummyUserType = {
   user: TUser;
 };
-
-export default DummyUserType;
