@@ -1,10 +1,11 @@
 "use client";
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 import { dummyData } from "@/data/DummyData";
-import { ProgressBelajar } from "@/type/TDummyData";
+import { Course, ProgressBelajar } from "@/type/TDummyData";
 
 interface KelasContextType {
-  dataKelasKu: ProgressBelajar[];
+  kelas: Course[];
+  progressBelajar: ProgressBelajar[];
   getCourseName: (idCourse: number) => string;
   getCourseId: (courseName: string) => number | undefined;
   getProgressPercentage: (idCourse: number) => number;
@@ -15,14 +16,15 @@ const KelasContext = createContext<KelasContextType | undefined>(undefined);
 export const KelasProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [dataKelasKu, setDataKelasKu] = useState<ProgressBelajar[]>([]);
-
+  const [progressBelajar, setProgressBelajar] = useState<ProgressBelajar[]>([]);
+  const [kelas, setKelas] = useState<Course[]>([]);
   useEffect(() => {
     const fetchData = () => {
       const data = dummyData.progress_belajar.filter(
         (item: ProgressBelajar) => item.id_user === 1
       );
-      setDataKelasKu(data);
+      setProgressBelajar(data);
+      setKelas(dummyData.course);
     };
 
     fetchData();
@@ -57,7 +59,13 @@ export const KelasProvider: React.FC<{ children: ReactNode }> = ({
 
   return (
     <KelasContext.Provider
-      value={{ dataKelasKu, getCourseName, getCourseId, getProgressPercentage }}
+      value={{
+        kelas,
+        progressBelajar,
+        getCourseName,
+        getCourseId,
+        getProgressPercentage,
+      }}
     >
       {children}
     </KelasContext.Provider>

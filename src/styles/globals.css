@@ -10,6 +10,10 @@
   @apply bg-[url(../assets/img/herobg.png)] bg-no-repeat h-[100svh] bg-cover bg-bottom;
 }
 
+.bg-kelas {
+  @apply bg-[url(../assets/img/kelasbg.png)] bg-no-repeat h-[100svh] bg-cover bg-bottom;
+}
+
 .layanan1 {
   @apply bg-[url(../assets/img/layanan1.png)] bg-no-repeat bg-cover;
 }

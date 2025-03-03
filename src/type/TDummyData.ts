@@ -40,6 +40,9 @@ interface Course {
   bidang_bisnis: string;
   jumlah_materi: number;
   jumlah_akses: number;
+  tingkat_kesulitan: string;
+  rating: number;
+  duration: string;
 }
 
 interface Materi {

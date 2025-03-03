@@ -7,11 +7,11 @@ const KelasKu = () => {
   if (!context) {
     throw new Error("ProgressContext must be used within a ProgressProvider");
   }
-  const { dataKelasKu } = context;
+  const { progressBelajar } = context;
   return (
     <div className="">
       <div className="flex flex-col gap-10">
-        {dataKelasKu.map((item, index) => (
+        {progressBelajar.map((item, index) => (
           <KelaskuCard kelas={item} key={index} />
         ))}
       </div>
