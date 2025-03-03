@@ -12,6 +12,7 @@ import {
   Posting,
   ProgressBelajar,
   ProgressKonten,
+  RiwayatPembayaran,
   TransaksiPremium,
   Tuser,
 } from "@/type/TDummyData";
@@ -242,4 +243,33 @@ export const dummyData = {
       status: "belum dilihat",
     },
   ] as ProgressKonten[],
+  riwayat_pembayaran: [
+    {
+      id_user: 1,
+      tipe_premium: "Weekly Premium",
+      date_pembelian: "2023-04-01",
+      kode_acak: "A1B2C3D4",
+      metode_pembayaran: "Credit Card",
+      harga: 50000,
+      status: "menunggu pembayaran",
+    },
+    {
+      id_user: 1,
+      tipe_premium: "Monthly Premium",
+      date_pembelian: "2023-05-15",
+      kode_acak: "M3N4O5P6",
+      metode_pembayaran: "Bank Transfer",
+      harga: 150000,
+      status: "pembayaran terkonfirmasi",
+    },
+    {
+      id_user: 1,
+      tipe_premium: "Annual Premium",
+      date_pembelian: "2023-08-20",
+      kode_acak: "Q7R8S9T0",
+      metode_pembayaran: "Digital Wallet",
+      harga: 1200000,
+      status: "pembayaran gagal",
+    },
+  ] as RiwayatPembayaran[],
 };

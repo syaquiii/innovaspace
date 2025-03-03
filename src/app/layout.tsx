@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { KelasProvider } from "@/context/KelasContext";
 import { MentorProvider } from "@/context/MentorContext";
+import { RiwayatPembayaranProvider } from "@/context/RiwayatPembayaranContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,9 +27,11 @@ export default function RootLayout({
       <body className={`${poppins.variable}  font-poppins relative `}>
         <KelasProvider>
           <MentorProvider>
-            <Navbar />
-            {children}
-            <Footer />
+            <RiwayatPembayaranProvider>
+              <Navbar />
+              {children}
+              <Footer />
+            </RiwayatPembayaranProvider>
           </MentorProvider>
         </KelasProvider>
       </body>

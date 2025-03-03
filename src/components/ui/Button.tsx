@@ -8,6 +8,9 @@ const buttonVariants = cva("rounded-xl active:scale-95 transition-all", {
     variant: {
       normal: "bg-normal-default text-light-default hover:bg-normal-hover",
       outline: "border-blue-300  border-4 rounded-xl",
+      green: "bg-ourgreen ",
+      red: "bg-[#FFBBBB] ",
+      orange: "bg-[#FFED9F] ",
     },
     size: {
       small: "px-2 py-1",

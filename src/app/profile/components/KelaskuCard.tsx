@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Button } from "@/components/ui/Button";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Link from "next/link";
-import KelasContext from "@/context/KelasContext";
+import { useKelasContext } from "@/hooks/useKelasContext";
 
 type KelaskuCardProps = {
   kelas: {
@@ -20,11 +20,7 @@ type KelaskuCardProps = {
 };
 
 const KelaskuCard: React.FC<KelaskuCardProps> = ({ kelas }) => {
-  const context = useContext(KelasContext);
-  if (!context) {
-    throw new Error("ProgressContext must be used within a ProgressProvider");
-  }
-  const { getCourseName, getProgressPercentage } = context;
+  const { getCourseName, getProgressPercentage } = useKelasContext();
   const progressPercentage = getProgressPercentage(kelas.id_course);
   const courseName = getCourseName(kelas.id_course);
   const basePath = "/kelas";

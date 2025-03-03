@@ -148,6 +148,16 @@ interface ProgressContextType {
   getProgressPercentage: (idCourse: number, idMateri: number) => number;
 }
 
+interface RiwayatPembayaran {
+  id_user: number;
+  tipe_premium: string;
+  date_pembelian: string;
+  kode_acak: string;
+  metode_pembayaran: string;
+  harga: number;
+  status: string;
+}
+
 export type {
   ProgressContextType,
   Tuser,
@@ -165,4 +175,5 @@ export type {
   Kursus,
   Konten,
   ProgressKonten,
+  RiwayatPembayaran,
 };

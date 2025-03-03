@@ -32,6 +32,7 @@ export default {
           default: "#122e58",
         },
         ourblack: "#101010",
+        ourgreen: "#C7FF9F",
       },
       fontFamily: {
         poppins: ["var(--font-poppins)"],
