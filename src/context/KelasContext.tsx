@@ -1,14 +1,15 @@
 "use client";
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 import { dummyData } from "@/data/DummyData";
-import { Course, ProgressBelajar } from "@/type/TDummyData";
+import { Course, ProgressBelajar, Materi } from "@/type/TDummyData";
 
 interface KelasContextType {
   kelas: Course[];
   progressBelajar: ProgressBelajar[];
-  getCourseName: (idCourse: number) => string;
-  getCourseId: (courseName: string) => number | undefined;
+  getCourseById: (idCourse: number) => Course | undefined;
   getProgressPercentage: (idCourse: number) => number;
+  fetchMateriByCourseId: (id_course: number | string) => Materi[];
+  getCourseByIdUser: (idUser: number) => Course[];
 }
 
 const KelasContext = createContext<KelasContextType | undefined>(undefined);
@@ -18,6 +19,7 @@ export const KelasProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [progressBelajar, setProgressBelajar] = useState<ProgressBelajar[]>([]);
   const [kelas, setKelas] = useState<Course[]>([]);
+
   useEffect(() => {
     const fetchData = () => {
       const data = dummyData.progress_belajar.filter(
@@ -43,28 +45,33 @@ export const KelasProvider: React.FC<{ children: ReactNode }> = ({
 
     return Math.round((progress / totalMateri) * 100);
   };
-  const getCourseName = (idCourse: number) => {
-    const course = dummyData.course.find(
-      (course) => course.id_course === idCourse
-    );
-    return course ? course.nama : "Unknown Course";
+
+  const getCourseById = (idCourse: number): Course | undefined => {
+    return dummyData.course.find((course) => course.id_course === idCourse);
   };
 
-  const getCourseId = (courseName: string) => {
-    const course = dummyData.course.find(
-      (course) => course.nama === courseName
+  const fetchMateriByCourseId = (id_course: number | string) => {
+    return dummyData.materi.filter((materi) => materi.id_course === id_course);
+  };
+  const getCourseByIdUser = (idUser: number): Course[] => {
+    const userProgress = dummyData.progress_belajar.filter(
+      (progress) => progress.id_user === idUser
     );
-    return course ? course.id_course : undefined;
+    const courseIds = userProgress.map((progress) => progress.id_course);
+    return dummyData.course.filter((course) =>
+      courseIds.includes(course.id_course)
+    );
   };
 
   return (
     <KelasContext.Provider
       value={{
+        getCourseByIdUser,
         kelas,
         progressBelajar,
-        getCourseName,
-        getCourseId,
+        getCourseById,
         getProgressPercentage,
+        fetchMateriByCourseId,
       }}
     >
       {children}

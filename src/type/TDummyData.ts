@@ -46,8 +46,8 @@ interface Course {
 }
 
 interface Materi {
-  id_materi: number;
-  id_course: number;
+  id_materi: number | string;
+  id_course: number | string;
   judul: string;
   deskripsi: string;
   kategori: string;

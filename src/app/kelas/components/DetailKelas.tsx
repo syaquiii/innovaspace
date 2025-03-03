@@ -1,0 +1,48 @@
+import { Button } from "@/components/ui/Button";
+import { Course } from "@/type/TDummyData";
+import React, { FC } from "react";
+
+type DetailKelas = {
+  data: Course;
+};
+
+const DetailKelas: FC<DetailKelas> = (data) => {
+  return (
+    <div>
+      <h3 className="text-4xl font-bold text-center mb-10">
+        💻 {data.data.nama}
+      </h3>
+      <div className="flex lg:flex-row flex-col gap-4 min-h-[20rem]">
+        <div className="lg:w-1/2">
+          <div className="w-full h-48 lg:h-[80%] bg-normal-default rounded-3xl">
+            {/* INI UNTUK IMG */}
+          </div>
+          <div className="flex text-xs lg:text-sm gap-4 mt-4">
+            <span className="bg-normal-default  px-2 py-1 text-white rounded-lg">
+              {data.data.kategori}
+            </span>
+            <span className="bg-normal-default  px-2 py-1 text-white rounded-lg">
+              &gt; {data.data.duration}
+            </span>
+            <span className="bg-normal-default  px-2 py-1 text-white rounded-lg">
+              {data.data.tingkat_kesulitan}
+            </span>
+          </div>
+        </div>
+        <div className="lg:w-1/2 flex flex-col gap-4 justify-between bg-light-default rounded-2xl p-4">
+          <div>
+            <span className="font-bold lg:text-2xl">Overview</span>
+            <p className="lg:text-lg text-xs mt-2 lg:mt-0 text-justify">
+              {data.data.deskripsi}
+            </p>
+          </div>
+          <Button className="w-full  " size={"normal"}>
+            Enroll
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default DetailKelas;

@@ -11,11 +11,7 @@ export const navlinkprofile: Tnavlink[] = [
     title: "Mentorku",
     url: "/mentorku",
   },
-  {
-    id: 3,
-    title: "Pencapaian",
-    url: "/pencapaian",
-  },
+
   {
     id: 4,
     title: "Riwayat Pembayaran",

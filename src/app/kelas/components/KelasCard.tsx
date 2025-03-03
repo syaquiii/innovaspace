@@ -7,7 +7,7 @@ type KelasCard = {
 
 const KelasCard: FC<KelasCard> = (kelas) => {
   return (
-    <div className="w-full lg:flex-col  lg:h-[20rem] lg:items-start bg-light-default overflow-hidden lg:p-4 p-2 md:p-6 min-h-24  gap-2 rounded-xl flex items-center">
+    <div className="w-full lg:flex-col  hover:scale-105 transition-all hover:bg-light-hover cursor-pointer lg:h-[20rem] lg:items-start bg-light-default overflow-hidden lg:p-4 p-2 md:p-6 min-h-24  gap-2 rounded-xl flex items-center">
       <div className="w-2/6 lg:w-full lg:h-2/3   aspect-square h-fit rounded-lg  bg-normal-default"></div>
       <div className="w-4/6 lg:w-full">
         <h4 className="font-bold text-sm md:text-2xl truncate  lg:truncate">

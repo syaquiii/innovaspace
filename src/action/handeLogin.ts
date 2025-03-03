@@ -19,7 +19,7 @@ export const handleLogin = async (
     setError("");
 
     Cookies.set("token", "dummyTokenValue", {
-      expires: 30,
+      expires: 1 / 8,
       path: "/",
       secure: true,
       sameSite: "strict",
