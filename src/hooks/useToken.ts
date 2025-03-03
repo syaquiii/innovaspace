@@ -7,7 +7,7 @@ const useToken = () => {
   useEffect(() => {
     const fetchedToken = Cookies.get("token");
     setToken(fetchedToken || null);
-  }, []);
+  }, [token]);
 
   return token;
 };

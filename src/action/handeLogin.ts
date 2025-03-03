@@ -30,6 +30,7 @@ export const handleLogin = async (
     } else {
       localStorage.removeItem("rememberMe");
     }
+    window.location.reload();
     redirect("/home");
   } else {
     setError("Invalid email or password");
