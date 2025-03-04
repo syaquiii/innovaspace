@@ -7,6 +7,8 @@ const inputVariants = cva("w-full rounded-lg", {
     variant: {
       normal:
         "bg-light-default lg:px-4 lg:text-xs xl:px-10 xl:text-lg px-10 py-3",
+      outline:
+        "bg-outline-default lg:px-4 lg:text-xs xl:px-10 xl:text-lg px-5 py-1 rounded-3xl border border-normal-default",
     },
   },
   defaultVariants: {

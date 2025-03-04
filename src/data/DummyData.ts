@@ -67,7 +67,7 @@ export const dummyData = {
       jumlah_akses: 100,
       tingkat_kesulitan: "Beginner",
       rating: 4.5,
-      duration: "5 hours",
+      duration: 5,
     },
     {
       id_course: 2,
@@ -80,7 +80,7 @@ export const dummyData = {
       jumlah_akses: 75,
       tingkat_kesulitan: "Advanced",
       rating: 4.7,
-      duration: "10 hours",
+      duration: 10,
     },
     {
       id_course: 3,
@@ -93,7 +93,7 @@ export const dummyData = {
       jumlah_akses: 120,
       tingkat_kesulitan: "Beginner",
       rating: 4.3,
-      duration: "4 hours",
+      duration: 4,
     },
     {
       id_course: 4,
@@ -106,7 +106,7 @@ export const dummyData = {
       jumlah_akses: 85,
       tingkat_kesulitan: "Intermediate",
       rating: 4.6,
-      duration: "6 hours",
+      duration: 6,
     },
     {
       id_course: 5,
@@ -119,7 +119,7 @@ export const dummyData = {
       jumlah_akses: 90,
       tingkat_kesulitan: "Intermediate",
       rating: 4.8,
-      duration: "7 hours",
+      duration: 7,
     },
     {
       id_course: 6,
@@ -132,7 +132,7 @@ export const dummyData = {
       jumlah_akses: 110,
       tingkat_kesulitan: "Advanced",
       rating: 4.9,
-      duration: "8 hours",
+      duration: 8,
     },
     {
       id_course: 7,
@@ -145,7 +145,7 @@ export const dummyData = {
       jumlah_akses: 95,
       tingkat_kesulitan: "Beginner",
       rating: 4.4,
-      duration: "5 hours",
+      duration: 5,
     },
   ] as Course[],
   materi: [

@@ -42,7 +42,7 @@ interface Course {
   jumlah_akses: number;
   tingkat_kesulitan: string;
   rating: number;
-  duration: string;
+  duration: string | number;
 }
 
 interface Materi {
