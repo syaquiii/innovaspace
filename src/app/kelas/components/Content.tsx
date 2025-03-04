@@ -1,4 +1,3 @@
-import { useKelasContext } from "@/hooks/useKelasContext";
 import React from "react";
 import KelasCard from "./KelasCard";
 import Link from "next/link";
