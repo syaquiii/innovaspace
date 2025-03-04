@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Course } from "@/type/TDummyData";
 import { FilterButton } from "./FilterButton";
-import { useFilterCourses } from "@/hooks/useFilterCourse";
 import { FilterData } from "@/data/FilterData";
 import { getDurationLabel } from "@/utils/durationLabels";
+import { useFilter } from "@/hooks/useFilterCourse";
 
 interface FilterProps {
   courses: Course[];
@@ -14,28 +14,11 @@ export const Filter: React.FC<FilterProps> = ({
   courses,
   setFilteredCourses,
 }) => {
-  const [filters, setFilters] = useState<{ [key: string]: string | null }>({
-    category: null,
-    difficulty: null,
-    duration: null,
-  });
-
-  const filteredCourses = useFilterCourses(courses, filters);
-
-  useEffect(() => {
-    setFilteredCourses(filteredCourses);
-  }, [filteredCourses, setFilteredCourses]);
-
-  const handleClick = (filterType: string, value: string) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [filterType]: prevFilters[filterType] === value ? null : value,
-    }));
-  };
+  const { filters, handleClick } = useFilter(courses, setFilteredCourses);
 
   return (
     <div className={`w-full h-full`}>
-      <div className="bg-light-defaul rounded-xl bg-light-default w-full min-h-[30rem] p-10 ">
+      <div className="bg-light-default rounded-xl shadow-lg w-full min-h-[30rem] p-10 ">
         <p className="text-xl font-bold mb-4">Filter</p>
 
         <span className="text-sm font-bold">Tipe</span>

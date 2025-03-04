@@ -24,7 +24,7 @@ export const dummyData = {
       email: "dummy@mail.com",
       username: "dummy dummy",
       password: "dummydummy",
-      nama: "John Doe",
+      nama: "Dika alfahrezi",
       institusi: "ABC University",
       bidang_bisnis: "Technology",
       preferensi: "AI",

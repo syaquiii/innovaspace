@@ -19,13 +19,13 @@ const Langganan: React.FC = () => {
             Join <span className="text-normal-default">Innova Space</span> now!
           </h2>
         </div>
-        <div className="lg:flex flex flex-col-reverse lg:flex-row gap-x-10 justify-between lg:mt-20">
-          <div className="lg:w-4/5 grid lg:grid-cols-3 gap-24 lg:gap-8">
+        <div className="lg:flex lg:px-32 lg:flex-col-reverse flex flex-col-reverse gap-x-10 justify-between lg:mt-0">
+          <div className="lg:w-full grid lg:grid-cols-3 gap-24 lg:gap-8">
             {Subslist.map((item: Tsubslist) => (
               <SubscriptionCard subs={item} key={item.id} />
             ))}
           </div>
-          <div className="lg:w-1/5 mt-24 mb-16 flex flex-row lg:flex-col justify-center">
+          <div className="lg:w-full mt-24 mb-16 flex  w-full text-center justify-center">
             <h2 className="font-bold text-4xl lg:text-6xl">Subsc</h2>
             <h2 className="font-bold text-4xl lg:text-6xl">ription</h2>
           </div>

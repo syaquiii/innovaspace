@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
     >
       {isOpen && <MobileNavbar />}
 
-      <div className="hidden fixed lg:w-full xl:w-[70rem]  md:w-full mycontainer mt-10 font-semibold md:text-md lg:text-md xl:text-xl bg-light-default md:flex justify-between h-20 rounded-3xl lg:px-8 items-center">
+      <div className="hidden fixed lg:w-full xl:w-[70rem]  md:w-full mycontainer mt-10 font-semibold md:text-md lg:text-md xl:text-xl shadow-2xl bg-light-default md:flex justify-between h-20 rounded-3xl lg:px-8 items-center">
         <Logo size="normal" style="dark" />
         <ul className="flex lg:gap-8 md:gap-4 xl:gap-16">
           {navlink.map((item) => (
@@ -101,7 +101,7 @@ const Navbar: React.FC = () => {
       </div>
       <div
         className={`md:hidden m-4 rounded-lg ${
-          isOpen ? "bg-opacity-0" : "bg-normal-default"
+          isOpen ? "bg-opacity-0" : "bg-normal-default "
         } text-white fixed`}
       >
         <Hamburger

@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Course } from "@/type/TDummyData";
 
-export const useFilterCourses = (
+export const useFilter = (
   courses: Course[],
-  filters: { [key: string]: string | null }
+  setFilteredCourses: (courses: Course[]) => void
 ) => {
-  const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
+  const [filters, setFilters] = useState<{ [key: string]: string | null }>({
+    category: null,
+    difficulty: null,
+    duration: null,
+  });
 
   useEffect(() => {
     const filtered = courses.filter((course) => {
@@ -13,11 +17,21 @@ export const useFilterCourses = (
         (!filters.category || course.kategori === filters.category) &&
         (!filters.difficulty ||
           course.tingkat_kesulitan === filters.difficulty) &&
-        (!filters.duration || course.duration < filters.duration) // Periksa apakah durasi KURANG DARI nilai yang dipilih
+        (!filters.duration || course.duration < filters.duration)
       );
     });
     setFilteredCourses(filtered);
-  }, [filters, courses]);
+  }, [filters, courses, setFilteredCourses]);
 
-  return filteredCourses;
+  const handleClick = (filterType: string, value: string) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterType]: prevFilters[filterType] === value ? null : value,
+    }));
+  };
+
+  return {
+    filters,
+    handleClick,
+  };
 };
