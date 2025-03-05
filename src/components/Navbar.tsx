@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
     <nav
       className={`${
         isVisible ? "top-0" : "opacity-0 -top-20"
-      } transition-all duration-300 fixed flex z-10   justify-end  md:justify-center lg:justify-center w-full mt-4 lg:mt-0`}
+      } transition-all duration-300 fixed flex z-50   justify-end  md:justify-center lg:justify-center w-full mt-4 lg:mt-0`}
     >
       {isOpen && <MobileNavbar />}
 

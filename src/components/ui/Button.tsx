@@ -15,7 +15,7 @@ const buttonVariants = cva("rounded-xl active:scale-95 transition-all", {
     size: {
       small: "px-2 py-1",
       normal: "px-4 py-2",
-      lg: "py-4 lg:text-lg text-sm px-16",
+      lg: "py-4 lg:text-lg text-sm px-8",
     },
   },
   defaultVariants: {
