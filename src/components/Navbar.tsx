@@ -28,35 +28,41 @@ const Navbar: React.FC = () => {
 
   const MobileNavbar = () => (
     <div
-      className={`${
-        isOpen &&
-        "bg-black bg-opacity-35 flex justify-end -mt-4 w-full h-screen"
+      className={`fixed inset-0 z-40 w-full bg-black bg-opacity-35 transition-opacity duration-300 ${
+        isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
+      onClick={() => setOpen(false)}
     >
-      <div className={`w-2/3 px-10 py-20 h-[100vh]   bg-light-default`}>
-        <ul className="flex gap-6 font-bold text-xl flex-col">
-          {navlink.map((item) => (
-            <li
-              className={
-                pathname === item.url || pathname.startsWith(item.url)
-                  ? "text-normal-default animate-pulse font-bold"
-                  : "text-black"
-              }
-              key={item.id}
-            >
-              <a href={item.url}>{item.title}</a>
-            </li>
-          ))}
-        </ul>
-        {!token ? (
-          <Link href={"/login"}>
-            <Button className="mt-4 px-8" variant="normal" size="normal">
-              Masuk
-            </Button>
-          </Link>
-        ) : (
-          <Profile hasbuttonToProfile={true} />
-        )}
+      <div
+        className={`fixed top-0 right-0 z-50 h-screen w-2/3 bg-light-default transform transition-all duration-300 ease-in-out ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="px-10 py-20">
+          <ul className="flex gap-6 font-bold text-xl flex-col">
+            {navlink.map((item) => (
+              <li
+                className={
+                  pathname === item.url || pathname.startsWith(item.url)
+                    ? "text-normal-default animate-pulse font-bold"
+                    : "text-black"
+                }
+                key={item.id}
+              >
+                <a href={item.url}>{item.title}</a>
+              </li>
+            ))}
+          </ul>
+          {!token ? (
+            <Link href={"/login"}>
+              <Button className="mt-4 px-8" variant="normal" size="normal">
+                Masuk
+              </Button>
+            </Link>
+          ) : (
+            <Profile hasbuttonToProfile={true} />
+          )}
+        </div>
       </div>
     </div>
   );
@@ -65,11 +71,11 @@ const Navbar: React.FC = () => {
     <nav
       className={`${
         isVisible ? "top-0" : "opacity-0 -top-20"
-      } transition-all duration-300 fixed flex z-50   justify-end  md:justify-center lg:justify-center w-full mt-4 lg:mt-0`}
+      } transition-all duration-300 fixed flex z-50 justify-end md:justify-center lg:justify-center w-full mt-4 lg:mt-0`}
     >
-      {isOpen && <MobileNavbar />}
+      <MobileNavbar />
 
-      <div className="hidden fixed lg:w-full xl:w-[70rem]  md:w-full mycontainer mt-10 font-semibold md:text-md lg:text-md xl:text-xl shadow-2xl bg-light-default md:flex justify-between h-20 rounded-3xl lg:px-8 items-center">
+      <div className="hidden fixed lg:w-full xl:w-[70rem] md:w-full mycontainer mt-10 font-semibold md:text-md lg:text-md xl:text-xl shadow-2xl bg-light-default md:flex justify-between h-20 rounded-3xl lg:px-8 items-center">
         <Logo size="normal" style="dark" />
         <ul className="flex lg:gap-8 md:gap-4 xl:gap-16">
           {navlink.map((item) => (
@@ -100,9 +106,9 @@ const Navbar: React.FC = () => {
         )}
       </div>
       <div
-        className={`md:hidden m-4 rounded-lg ${
-          isOpen ? "bg-opacity-0" : "bg-normal-default "
-        } text-white fixed`}
+        className={`md:hidden m-4 relative z-[200] rounded-lg ${
+          isOpen ? "bg-opacity-0 text-black" : "bg-normal-default"
+        }  fixed`}
       >
         <Hamburger
           size={24}

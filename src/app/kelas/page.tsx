@@ -43,7 +43,6 @@ const Page = () => {
               setFilteredCourses={setFilteredCourses}
             />
           </div>
-
           <Content courses={filteredCourses} />
         </div>
       </div>

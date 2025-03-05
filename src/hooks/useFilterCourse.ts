@@ -11,6 +11,8 @@ export const useFilter = (
     duration: null,
   });
 
+  const [isFilteredDataEmpty, setIsFilteredDataEmpty] = useState(false);
+
   useEffect(() => {
     const filtered = courses.filter((course) => {
       return (
@@ -20,7 +22,9 @@ export const useFilter = (
         (!filters.duration || course.duration < filters.duration)
       );
     });
+
     setFilteredCourses(filtered);
+    setIsFilteredDataEmpty(filtered.length === 0);
   }, [filters, courses, setFilteredCourses]);
 
   const handleClick = (filterType: string, value: string) => {
@@ -33,5 +37,6 @@ export const useFilter = (
   return {
     filters,
     handleClick,
+    isFilteredDataEmpty,
   };
 };
