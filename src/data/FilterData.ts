@@ -1,4 +1,4 @@
-export const FilterData = {
+export const FilterDataCourse = {
   categories: [
     { label: "Business", value: "Business" },
     { label: "Marketing", value: "Marketing" },
@@ -11,4 +11,16 @@ export const FilterData = {
     { label: "Advanced", value: "Advanced" },
   ],
   durations: [10, 6, 2],
+};
+
+export const FilterDataMentor = {
+  types: [
+    { value: "starter", label: "starter" },
+    { value: "premium", label: "premium" },
+  ],
+  preferensi: [
+    { value: "Investment", label: "Investment" },
+    { value: "Software Development", label: "Software Development" },
+    { value: "Public Health", label: "Public Health" },
+  ],
 };

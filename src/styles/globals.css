@@ -33,3 +33,7 @@
 .bg-langganan {
   @apply bg-[url(../assets/img/langgananbg.png)] bg-no-repeat bg-cover;
 }
+
+.bg-mentor {
+  @apply bg-[url(../assets/img/mentorbg.png)] bg-no-repeat bg-cover;
+}

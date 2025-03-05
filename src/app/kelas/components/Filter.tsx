@@ -1,7 +1,7 @@
 import React from "react";
 import { Course } from "@/type/TDummyData";
 import { FilterButton } from "./FilterButton";
-import { FilterData } from "@/data/FilterData";
+import { FilterDataCourse } from "@/data/FilterData";
 import { getDurationLabel } from "@/utils/durationLabels";
 import { useFilter } from "@/hooks/useFilterCourse";
 
@@ -23,7 +23,7 @@ export const Filter: React.FC<FilterProps> = ({
 
         <span className="text-sm font-bold">Tipe</span>
         <div className="grid grid-cols-2 gap-4 mt-4 text-sm">
-          {FilterData.categories.map((category) => (
+          {FilterDataCourse.categories.map((category) => (
             <FilterButton
               key={category.value}
               label={category.label}
@@ -35,7 +35,7 @@ export const Filter: React.FC<FilterProps> = ({
 
         <span className="text-sm font-bold mt-6 block">Tingkat Kesulitan</span>
         <div className="grid grid-cols-2 gap-4 mt-4 text-sm">
-          {FilterData.difficulties.map((difficulty) => (
+          {FilterDataCourse.difficulties.map((difficulty) => (
             <FilterButton
               key={difficulty.value}
               label={difficulty.label}
@@ -47,7 +47,7 @@ export const Filter: React.FC<FilterProps> = ({
 
         <span className="text-sm font-bold mt-6 block">Durasi (jam)</span>
         <div className="grid grid-cols-2 gap-4 mt-4 text-sm">
-          {FilterData.durations.map((duration) => (
+          {FilterDataCourse.durations.map((duration) => (
             <FilterButton
               key={duration}
               label={getDurationLabel(duration)}

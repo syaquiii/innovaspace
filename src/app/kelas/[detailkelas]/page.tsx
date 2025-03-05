@@ -9,15 +9,12 @@ const Page = () => {
   const pathname = usePathname();
   const currenPath = pathname.split("/");
   const kelasId = currenPath.length > 2 ? currenPath[2] : null;
-
   const { getCourseById, fetchMateriByCourseId } = useKelasContext();
-
   if (!kelasId) return null;
-
   const dataKelas = getCourseById(parseInt(kelasId));
   const dataMateri = fetchMateriByCourseId(parseInt(kelasId));
   if (!dataKelas) {
-    return <p>Course not found.</p>;
+    throw new Error("No products found");
   }
 
   return (

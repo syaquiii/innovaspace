@@ -1,17 +1,17 @@
 "use client";
 import Hero from "./components/Hero";
 import Content from "./components/Content";
-import { useKelasContext } from "@/hooks/useKelasContext";
-import { useState } from "react";
+import { useMentorContext } from "@/hooks/useMentorContext";
 import { MobileFilter } from "./components/MobileFilter";
+import { useState } from "react";
 import { Filter } from "./components/Filter";
 import { Search } from "./components/Search";
-import { handleCourseSearch } from "@/utils/handleSearch";
+import { handleMentorSearch } from "@/utils/handleSearch";
 
 const Page = () => {
-  const { kelas } = useKelasContext();
-  const courseData = kelas;
-  const [filteredCourses, setFilteredCourses] = useState(kelas);
+  const { mentors } = useMentorContext();
+  const mentorsData = mentors;
+  const [filteredMentors, setFilteredMentors] = useState(mentors);
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
@@ -22,28 +22,25 @@ const Page = () => {
           <Search
             searchQuery={searchQuery}
             onSearchChange={(query) =>
-              handleCourseSearch(
+              handleMentorSearch(
                 query,
-                courseData,
+                mentorsData,
                 setSearchQuery,
-                setFilteredCourses
+                setFilteredMentors
               )
             }
           />
           <MobileFilter
-            courses={courseData}
-            setFilteredCourses={setFilteredCourses}
+            mentors={mentorsData}
+            setFilteredMentors={setFilteredMentors}
           />
         </div>
 
         <div className="flex gap-8">
           <div className="hidden lg:block w-1/3">
-            <Filter
-              courses={courseData}
-              setFilteredCourses={setFilteredCourses}
-            />
+            <Filter mentors={mentors} setFilteredMentors={setFilteredMentors} />
           </div>
-          <Content courses={filteredCourses} />
+          <Content mentor={filteredMentors} />
         </div>
       </div>
     </section>

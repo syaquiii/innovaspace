@@ -1,11 +1,5 @@
 "use client";
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
+import React, { createContext, useState, useEffect, ReactNode } from "react";
 import { dummyData } from "@/data/DummyData";
 import { Mentor, Match } from "@/type/TDummyData";
 
@@ -13,6 +7,7 @@ interface MentorContextType {
   mentors: Mentor[];
   getMentorById: (id_mentor: number) => Mentor | undefined;
   getMentorForUser: (id_user: number) => Mentor | undefined;
+  fetchAllMentors: () => Mentor[];
 }
 
 const MentorContext = createContext<MentorContextType | undefined>(undefined);
@@ -25,7 +20,7 @@ export const MentorProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     const fetchMentorsAndMatches = () => {
-      setMentors(dummyData.mentor);
+      setMentors(dummyData.mentors);
       setMatches(dummyData.match);
     };
 
@@ -40,22 +35,17 @@ export const MentorProvider: React.FC<{ children: ReactNode }> = ({
     const match = matches.find((match) => match.id_user === id_user);
     return match ? getMentorById(match.id_mentor) : undefined;
   };
+  const fetchAllMentors = () => {
+    return mentors;
+  };
 
   return (
     <MentorContext.Provider
-      value={{ mentors, getMentorById, getMentorForUser }}
+      value={{ fetchAllMentors, mentors, getMentorById, getMentorForUser }}
     >
       {children}
     </MentorContext.Provider>
   );
-};
-
-export const useMentor = () => {
-  const context = useContext(MentorContext);
-  if (!context) {
-    throw new Error("useMentor must be used within a MentorProvider");
-  }
-  return context;
 };
 
 export default MentorContext;

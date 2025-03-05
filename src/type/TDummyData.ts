@@ -18,17 +18,15 @@ interface Tuser {
 
 interface Mentor {
   id_mentor: number;
-  email: string;
-  username: string;
-  password: string;
   nama: string;
   institusi: string;
-  bidang_bisnis: string;
+  pengalaman_kerja: string;
+  pencapaian: string;
+  contact: string;
+  keahilan: string;
+  topik_yang_diajarkan: string;
   preferensi: string;
-  created_by: string;
-  created_date: string;
-  modified_by: string;
-  modified_date: string;
+  type: string;
   detail: string;
 }
 
