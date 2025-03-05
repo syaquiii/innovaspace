@@ -23,8 +23,10 @@ export const handleMentorSearch = (
 ) => {
   setSearchQuery(query);
 
-  const filteredMentors = mentors.filter((mentor) =>
-    mentor.nama.toLowerCase().includes(query.toLowerCase())
+  const filteredMentors = mentors.filter(
+    (mentor) =>
+      mentor.nama.toLowerCase().includes(query.toLowerCase()) ||
+      mentor.preferensi.toLowerCase().includes(query.toLowerCase())
   );
 
   setFilteredMentors(filteredMentors);
