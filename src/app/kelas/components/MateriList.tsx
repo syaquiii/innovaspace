@@ -35,7 +35,11 @@ const MateriList: React.FC<MateriListProps> = ({ dataMateri }) => {
                   handleMateriClick(materi.id_materi);
                 }}
               >
-                Bab {index + 1}
+                {dataMateri.length - 1 === index
+                  ? "Case Study"
+                  : `
+                Bab ${index + 1}
+                `}
                 <span>
                   <ArrowDown />
                 </span>

@@ -13,7 +13,7 @@ type Action =
   | { type: "SET_MATERI"; payload: Materi }
   | { type: "NEXT_MATERI" }
   | { type: "PREVIOUS_MATERI" }
-  | { type: "FINISH" };
+  | { type: "FINISH"; payload: boolean };
 
 const initialState: State = {
   openMateriId: null,
@@ -55,7 +55,7 @@ const reducer = (state: State, action: Action, dataMateri: Materi[]): State => {
     case "FINISH":
       return {
         ...state,
-        isFinished: true,
+        isFinished: action.payload,
       };
     default:
       return state;
@@ -75,6 +75,9 @@ const useMateriReducer = (dataMateri: Materi[]) => {
     if (materi) {
       dispatch({ type: "SET_MATERI", payload: materi });
 
+      // Reset isFinished when a new materi is selected manually
+      dispatch({ type: "FINISH", payload: false });
+
       if (materiRef.current) {
         materiRef.current.scrollIntoView({
           behavior: "smooth",
@@ -92,15 +95,41 @@ const useMateriReducer = (dataMateri: Materi[]) => {
 
   const handleNext = () => {
     if (state.currentIndex < dataMateri.length - 1) {
+      const nextIndex = state.currentIndex + 1;
+      const nextMateri = dataMateri[nextIndex];
       dispatch({ type: "NEXT_MATERI" });
+
+      // Buka materi berikutnya
+      toggleMateri(nextMateri.id_materi);
+
+      // Scroll ke elemen yang direferensikan
+      if (materiRef.current) {
+        materiRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
     } else {
-      dispatch({ type: "FINISH" });
+      dispatch({ type: "FINISH", payload: true });
     }
   };
 
   const handlePrevious = () => {
     if (state.currentIndex > 0) {
+      const prevIndex = state.currentIndex - 1;
+      const prevMateri = dataMateri[prevIndex];
       dispatch({ type: "PREVIOUS_MATERI" });
+
+      // Buka materi sebelumnya
+      toggleMateri(prevMateri.id_materi);
+
+      // Scroll ke elemen yang direferensikan
+      if (materiRef.current) {
+        materiRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
     }
   };
 
