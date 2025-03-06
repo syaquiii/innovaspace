@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useRef } from "react";
 import { Materi } from "@/type/TDummyData";
 
 interface State {
@@ -68,10 +68,19 @@ const useMateriReducer = (dataMateri: Materi[]) => {
     initialState
   );
 
+  const materiRef = useRef<HTMLDivElement | null>(null);
+
   const handleMateriClick = (idMateri: number) => {
     const materi = dataMateri.find((m) => m.id_materi === idMateri);
     if (materi) {
       dispatch({ type: "SET_MATERI", payload: materi });
+
+      if (materiRef.current) {
+        materiRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
     } else {
       console.log("Materi tidak ditemukan!");
     }
@@ -101,6 +110,7 @@ const useMateriReducer = (dataMateri: Materi[]) => {
     toggleMateri,
     handleNext,
     handlePrevious,
+    materiRef,
   };
 };
 

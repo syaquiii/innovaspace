@@ -12,8 +12,14 @@ interface MateriListProps {
 const MateriList: React.FC<MateriListProps> = ({ dataMateri }) => {
   const materiDescRef = useRef<HTMLDivElement>(null);
 
-  const { state, handleMateriClick, toggleMateri, handleNext, handlePrevious } =
-    useMateriReducer(dataMateri);
+  const {
+    state,
+    handleMateriClick,
+    toggleMateri,
+    handleNext,
+    handlePrevious,
+    materiRef,
+  } = useMateriReducer(dataMateri);
 
   return (
     <div className="flex flex-col lg:flex-row gap-10 mt-10">
@@ -53,7 +59,10 @@ const MateriList: React.FC<MateriListProps> = ({ dataMateri }) => {
         className="w-full h-[20rem] bg-light-default rounded-xl shadow-lg p-6"
       >
         {state.materiTerpilih ? (
-          <div className="flex justify-between flex-col  h-full">
+          <div
+            ref={materiRef}
+            className="flex justify-between flex-col  h-full"
+          >
             <div>
               <h2 className="text-2xl font-bold mb-4">
                 {state.materiTerpilih.judul}
