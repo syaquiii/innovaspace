@@ -14,15 +14,13 @@ const DetailKelas: FC<DetailKelas> = (data) => {
       </h3>
       <div className="flex lg:flex-row flex-col gap-4 min-h-[20rem]">
         <div className="lg:w-1/2">
-          <div className="w-full h-48 lg:h-[80%] bg-normal-default rounded-3xl">
-            {/* INI UNTUK IMG */}
-          </div>
+          <div className="w-full h-48 lg:h-[80%] bg-normal-default rounded-3xl"></div>
           <div className="flex text-xs lg:text-sm gap-4 mt-4">
             <span className="bg-normal-default  px-2 py-1 text-white rounded-lg">
               {data.data.kategori}
             </span>
             <span className="bg-normal-default  px-2 py-1 text-white rounded-lg">
-              &gt; {data.data.duration}
+              less than {data.data.duration} hours
             </span>
             <span className="bg-normal-default  px-2 py-1 text-white rounded-lg">
               {data.data.tingkat_kesulitan}

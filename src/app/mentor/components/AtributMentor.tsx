@@ -15,15 +15,7 @@ const AtributMentor: FC<IProps> = (props) => {
             <p>{props.data.institusi}</p>
           </div>
         </div>
-        <div className="w-full">
-          <h4 className="font-bold  text-xl">Contact</h4>
-          <div className="bg-light-default  p-4 text-sm rounded-lg shadow-sm">
-            <p className="flex items-center gap-2">
-              <Mail />
-              {props.data.contact}
-            </p>
-          </div>
-        </div>
+
         <div className="w-full">
           <h4 className="font-bold  text-xl">Pencapaian</h4>
           <div className="bg-light-default  p-4 text-sm rounded-lg shadow-sm">
