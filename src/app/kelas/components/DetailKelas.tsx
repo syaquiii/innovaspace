@@ -15,7 +15,7 @@ const DetailKelas: FC<DetailKelas> = (data) => {
       <div className="flex lg:flex-row flex-col gap-4 min-h-[20rem]">
         <div className="lg:w-1/2">
           <div className="w-full h-48 lg:h-[80%] bg-normal-default rounded-3xl"></div>
-          <div className="flex justify-between text-xs lg:text-sm gap-4 mt-4">
+          <div className="flex ;g:justify-between text-xs lg:text-sm gap-4 mt-4">
             <span className="bg-normal-default  px-2 py-1 text-white rounded-lg">
               {data.data.kategori}
             </span>
