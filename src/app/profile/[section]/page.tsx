@@ -7,7 +7,6 @@ import MentorKu from "../components/MentorKu";
 import Pembayaran from "../components/Pembayaran";
 const Page = () => {
   const pathname = usePathname();
-
   const renderComponent = () => {
     switch (pathname) {
       case "/profile/kelasku":

@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { KelasProvider } from "@/context/KelasContext";
 import { MentorProvider } from "@/context/MentorContext";
 import { RiwayatPembayaranProvider } from "@/context/RiwayatPembayaranContext";
+import { UserProvider } from "@/context/UserContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -25,15 +26,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable}  font-poppins relative `}>
-        <KelasProvider>
-          <MentorProvider>
-            <RiwayatPembayaranProvider>
-              <Navbar />
-              {children}
-              <Footer />
-            </RiwayatPembayaranProvider>
-          </MentorProvider>
-        </KelasProvider>
+        <UserProvider>
+          <KelasProvider>
+            <MentorProvider>
+              <RiwayatPembayaranProvider>
+                <Navbar />
+                {children}
+                <Footer />
+              </RiwayatPembayaranProvider>
+            </MentorProvider>
+          </KelasProvider>
+        </UserProvider>
       </body>
     </html>
   );

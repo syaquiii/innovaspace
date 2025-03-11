@@ -1,89 +1,65 @@
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 import apiInstance from "../core/core";
 
 interface UserProfile {
-  id: string;
-  name: string;
+  nama: string;
+  username: string;
   email: string;
-  institusi?: string;
-  mentor_id?: string;
+  preferensi: string;
+  institusi: string;
 }
 
-export const getUserProfile = async (
-  userId: string,
-  token: string
-): Promise<UserProfile> => {
+export const getTokenFromCookies = (): string | undefined => {
+  return Cookies.get("token");
+};
+const token = getTokenFromCookies();
+
+export const fetchUserProfile = async (): Promise<UserProfile> => {
   try {
-    const response = await apiInstance.get<UserProfile>(
-      `/users/get-profile/${userId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    return response.data;
+    if (!token) {
+      throw new Error("Token not found in cookies.");
+    }
+
+    // Decode the token to get UserId
+    const decodedToken = jwtDecode<{ UserId: string; exp: number }>(token);
+    const userId = decodedToken.UserId;
+
+    const response = await apiInstance.get(`/users/get-profile/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data.data.profile as UserProfile;
   } catch (error) {
-    console.error("Error fetching profile:", error);
+    console.error("Error fetching user profile:", error);
     throw error;
   }
 };
 
-export const updateProfile = async (
+export const updateUserProfile = async (
   userId: string,
-  token: string,
-  data: { institusi: string }
-): Promise<UserProfile> => {
+  updatedData: Partial<UserProfile>
+) => {
   try {
-    const response = await apiInstance.patch<UserProfile>(
+    if (!token) {
+      throw new Error("Token not found in cookies.");
+    }
+
+    const response = await apiInstance.patch(
       `/users/update/${userId}`,
-      data,
+      updatedData,
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
-    return response.data;
-  } catch (error) {
-    console.error("Error updating profile:", error);
-    throw error;
-  }
-};
 
-export const setMentor = async (
-  userId: string,
-  token: string,
-  mentorId: string
-): Promise<UserProfile> => {
-  try {
-    const response = await apiInstance.patch<UserProfile>(
-      `/users/set-mentor/${userId}`,
-      { mentor_id: mentorId },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
     return response.data;
   } catch (error) {
-    console.error("Error setting mentor:", error);
-    throw error;
-  }
-};
-
-export const updateMentor = async (
-  userId: string,
-  data: { mentor_id: string }
-): Promise<UserProfile> => {
-  try {
-    const response = await apiInstance.patch<UserProfile>(
-      `/users/update-mentor/${userId}`,
-      data
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error updating mentor:", error);
+    console.error("Error updating user profile:", error);
     throw error;
   }
 };

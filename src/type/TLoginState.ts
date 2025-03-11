@@ -1,5 +1,5 @@
 export interface LoginFormState {
-  email: string;
+  username: string;
   password: string;
 }
 export type SetError = (error: string) => void;

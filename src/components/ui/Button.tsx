@@ -6,6 +6,7 @@ import { cn } from "@/utils/util";
 const buttonVariants = cva("rounded-xl  active:scale-95 transition-all", {
   variants: {
     variant: {
+      danger: "bg-[#EC4848] text-white",
       normal: "bg-normal-default text-light-default hover:bg-normal-hover",
       outline: "border-blue-300  border-2 rounded-xl",
       green: "bg-ourgreen border-2 border-ourgreen ",

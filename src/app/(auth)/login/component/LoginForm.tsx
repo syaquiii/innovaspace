@@ -16,7 +16,7 @@ const LoginForm: React.FC = () => {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await handleLogin(
-      loginForm.email,
+      loginForm.username,
       loginForm.password,
       rememberMe,
       setError
@@ -26,14 +26,14 @@ const LoginForm: React.FC = () => {
   return (
     <form className="flex flex-col gap-y-6" onSubmit={onSubmit}>
       <div className="flex flex-col gap-2">
-        <label htmlFor="email" className="font-bold text-lg">
-          Email
+        <label htmlFor="username" className="font-bold text-lg">
+          Username
         </label>
         <Input
-          name="email"
-          placeholder="youremail@gmail.com"
+          name="username"
+          placeholder="username"
           type="text"
-          value={loginForm.email}
+          value={loginForm.username}
           onChange={handleChange}
         />
       </div>

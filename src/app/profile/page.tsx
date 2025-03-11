@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 import React from "react";
 
-const page = () => {
+const Page = () => {
   return <div className="min-h-screen">{redirect("/profile/kelasku")}</div>;
 };
 
-export default page;
+export default Page;
