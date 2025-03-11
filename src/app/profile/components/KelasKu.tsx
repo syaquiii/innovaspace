@@ -4,6 +4,7 @@ import { useKelasContext } from "@/hooks/useKelasContext";
 
 const KelasKu = () => {
   const { progressBelajar } = useKelasContext();
+  console.log(progressBelajar);
   return (
     <div className="">
       <div className="flex flex-col gap-10">

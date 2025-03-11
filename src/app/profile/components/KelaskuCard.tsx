@@ -43,7 +43,7 @@ const KelaskuCard: React.FC<KelaskuCardProps> = ({ kelas }) => {
 
           <div className="w-1/3">
             <CircularProgressbar
-              className="w-16 h-16 lg:h-24 lg:w-24"
+              className="w-10 h-10 lg:h-24 lg:w-24"
               value={progressPercentage}
               maxValue={100}
               text={`${progressPercentage}%`}
