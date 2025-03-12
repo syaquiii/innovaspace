@@ -7,20 +7,27 @@ import React, { useState } from "react";
 import useLoginForm from "@/hooks/useLoginForm";
 import useRememberMe from "@/hooks/useRememberMe";
 import { handleLogin } from "@/action/handeLogin";
+import { useRouter } from "next/navigation";
 
 const LoginForm: React.FC = () => {
   const { loginForm, handleChange } = useLoginForm();
   const { rememberMe, handleRememberMeChange } = useRememberMe();
   const [error, setError] = useState<string>("");
-
+  const router = useRouter();
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await handleLogin(
-      loginForm.username,
-      loginForm.password,
-      rememberMe,
-      setError
-    );
+    try {
+      await handleLogin(loginForm.username, loginForm.password, rememberMe);
+      setError("");
+      window.location.reload();
+      router.push("/home");
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
+    }
   };
 
   return (

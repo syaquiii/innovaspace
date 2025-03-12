@@ -1,5 +1,7 @@
+import { handleLogout } from "@/action/handleLogout";
 import { Button } from "@/components/ui/Button";
 import { useUserContext } from "@/hooks/useUserContext";
+import { DoorOpen } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -27,19 +29,24 @@ const Profile = ({ hasbuttonToProfile }: { hasbuttonToProfile: boolean }) => {
         <span className=" text-sm  lg:text-4xl font-bold">
           {profile.username}
         </span>
-        <div className="flex flex-col gap-4  justify-between ">
+        <div className="flex  items-center gap-2  ">
           <Link
-            className="flex-grow"
+            className="w-full"
             href={hasbuttonToProfile ? "/profile" : "editprofile"}
           >
             <Button
-              className=" w-full text-xs lg:text-lg"
+              className=" w-full text-xs lg:text-sm"
               variant="normal"
               size={"normal"}
             >
-              {hasbuttonToProfile ? "Profile" : "edit Profile"}
+              {hasbuttonToProfile ? "Profile" : "Edit"}
             </Button>
           </Link>
+
+          <DoorOpen
+            onClick={handleLogout}
+            className="w-10 h-10 text-red-600 cursor-pointer"
+          />
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/home", req.url));
   }
 
-  if (!token && req.nextUrl.pathname === "/profile") {
+  if (!token && req.nextUrl.pathname.startsWith("/profile")) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
