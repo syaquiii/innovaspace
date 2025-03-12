@@ -1,5 +1,5 @@
 "use client";
-import MentorContext from "@/context/MentorContext";
+import { MentorContext } from "@/context/MentorContext";
 import { useContext } from "react";
 
 export const useMentorContext = () => {

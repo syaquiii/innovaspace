@@ -1,10 +1,8 @@
+import { Mentor } from "@/type/Tmentor";
 import React, { useState } from "react";
-import { Mentor } from "@/type/TDummyData";
 
 interface Filters {
-  preference?: string;
-  type?: string;
-  popularity?: string;
+  spesialisasi?: string;
 }
 
 export const useFilterMentor = (
@@ -23,14 +21,10 @@ export const useFilterMentor = (
   React.useEffect(() => {
     let filtered = mentors;
 
-    if (filters.preference) {
+    if (filters.spesialisasi) {
       filtered = filtered.filter(
-        (mentor) => mentor.preferensi === filters.preference
+        (mentor) => mentor.spesialisasi === filters.spesialisasi
       );
-    }
-
-    if (filters.type) {
-      filtered = filtered.filter((mentor) => mentor.type === filters.type);
     }
 
     setFilteredMentors(filtered);

@@ -1,51 +1,81 @@
 "use client";
-import React, { createContext, useState, useEffect, ReactNode } from "react";
-import { dummyData } from "@/data/DummyData";
-import { Mentor, Match } from "@/type/TDummyData";
+import { getAllMentors, getMentorDetails } from "@/api/services/mentor";
+import { Mentor } from "@/type/Tmentor";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+  useMemo,
+} from "react";
 
-interface MentorContextType {
+export interface MentorContextProps {
   mentors: Mentor[];
-  getMentorById: (id_mentor: number) => Mentor | undefined;
-  getMentorForUser: (id_user: number) => Mentor | undefined;
-  fetchAllMentors: () => Mentor[];
+  isLoading: boolean;
+  error: Error | null;
+  fetchMentorDetails: (mentorId: string) => Promise<Mentor | null>;
 }
 
-const MentorContext = createContext<MentorContextType | undefined>(undefined);
+interface MentorProviderProps {
+  children: ReactNode;
+}
 
-export const MentorProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
-  const [mentors, setMentors] = useState<Mentor[]>([]);
-  const [matches, setMatches] = useState<Match[]>([]);
+export const MentorContext = createContext<MentorContextProps | undefined>(
+  undefined
+);
 
-  useEffect(() => {
-    const fetchMentorsAndMatches = () => {
-      setMentors(dummyData.mentors);
-      setMatches(dummyData.match);
-    };
-
-    fetchMentorsAndMatches();
-  }, []);
-
-  const getMentorById = (id_mentor: number) => {
-    return mentors.find((mentor) => mentor.id_mentor === id_mentor);
-  };
-
-  const getMentorForUser = (id_user: number) => {
-    const match = matches.find((match) => match.id_user === id_user);
-    return match ? getMentorById(match.id_mentor) : undefined;
-  };
-  const fetchAllMentors = () => {
-    return mentors;
-  };
-
-  return (
-    <MentorContext.Provider
-      value={{ fetchAllMentors, mentors, getMentorById, getMentorForUser }}
-    >
-      {children}
-    </MentorContext.Provider>
-  );
+export const useMentorContext = () => {
+  const context = useContext(MentorContext);
+  if (!context) {
+    throw new Error("useMentorContext must be used within a MentorProvider");
+  }
+  return context;
 };
 
-export default MentorContext;
+export const MentorProvider: React.FC<MentorProviderProps> = ({ children }) => {
+  const [mentors, setMentors] = useState<Mentor[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    const fetchMentors = async () => {
+      try {
+        const response = await getAllMentors();
+        console.log("API response:", response.data);
+        if (response.data && response.data.mentor) {
+          setMentors(response.data.mentor);
+        } else {
+          console.error("Unexpected API response structure", response.data);
+          setError(new Error("Unexpected API response structure"));
+        }
+      } catch (error) {
+        console.error("Error fetching mentors:", error);
+        setError(error as Error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchMentors();
+  }, []);
+
+  const fetchMentorDetails = async (mentorId: string) => {
+    try {
+      const mentor = await getMentorDetails(mentorId);
+      return mentor;
+    } catch (error) {
+      console.error("Error fetching mentor details:", error);
+      return null;
+    }
+  };
+
+  const value = useMemo(
+    () => ({ mentors, isLoading, error, fetchMentorDetails }),
+    [mentors, isLoading, error]
+  );
+
+  return (
+    <MentorContext.Provider value={value}>{children}</MentorContext.Provider>
+  );
+};

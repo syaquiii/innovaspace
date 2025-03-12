@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Mentor } from "@/type/TDummyData";
 import { Settings, X } from "lucide-react";
 import { Filter } from "./Filter";
+import { Mentor } from "@/type/Tmentor";
 
 interface MobileFilterProps {
   mentors: Mentor[];

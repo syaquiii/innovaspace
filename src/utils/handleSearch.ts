@@ -1,4 +1,5 @@
-import { Course, Mentor } from "@/type/TDummyData";
+import { Course } from "@/type/TDummyData";
+import { Mentor } from "@/type/Tmentor";
 
 export const handleCourseSearch = (
   query: string,
@@ -26,7 +27,7 @@ export const handleMentorSearch = (
   const filteredMentors = mentors.filter(
     (mentor) =>
       mentor.nama.toLowerCase().includes(query.toLowerCase()) ||
-      mentor.preferensi.toLowerCase().includes(query.toLowerCase())
+      mentor.spesialisasi.toLowerCase().includes(query.toLowerCase())
   );
 
   setFilteredMentors(filteredMentors);

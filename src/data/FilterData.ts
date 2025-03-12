@@ -14,13 +14,7 @@ export const FilterDataCourse = {
 };
 
 export const FilterDataMentor = {
-  types: [
-    { value: "starter", label: "starter" },
-    { value: "premium", label: "premium" },
-  ],
-  preferensi: [
-    { value: "Investment", label: "Investment" },
-    { value: "Software Development", label: "Software Development" },
-    { value: "Public Health", label: "Public Health" },
+  spesialiasasi: [
+    { value: "Social Media Specialist", label: "Social Media Specialist" },
   ],
 };

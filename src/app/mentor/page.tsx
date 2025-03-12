@@ -7,13 +7,14 @@ import { useState } from "react";
 import { Filter } from "./components/Filter";
 import { Search } from "./components/Search";
 import { handleMentorSearch } from "@/utils/handleSearch";
+import { Mentor } from "@/type/Tmentor";
 
 const Page = () => {
   const { mentors } = useMentorContext();
-  const mentorsData = mentors;
-  const [filteredMentors, setFilteredMentors] = useState(mentors);
+  const [filteredMentors, setFilteredMentors] = useState<Mentor[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
+  console.log(mentors);
   return (
     <section className="h-fit">
       <Hero />
@@ -24,21 +25,24 @@ const Page = () => {
             onSearchChange={(query) =>
               handleMentorSearch(
                 query,
-                mentorsData,
+                mentors || [],
                 setSearchQuery,
                 setFilteredMentors
               )
             }
           />
           <MobileFilter
-            mentors={mentorsData}
+            mentors={mentors || []}
             setFilteredMentors={setFilteredMentors}
           />
         </div>
 
         <div className="flex gap-8">
           <div className="hidden lg:block w-1/3">
-            <Filter mentors={mentors} setFilteredMentors={setFilteredMentors} />
+            <Filter
+              mentors={mentors || []}
+              setFilteredMentors={setFilteredMentors}
+            />
           </div>
           <Content mentor={filteredMentors} />
         </div>
