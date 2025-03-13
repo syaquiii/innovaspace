@@ -75,7 +75,10 @@ const MateriList: React.FC<MateriListProps> = ({ dataMateri }) => {
         className="w-full min-h-[20rem] bg-light-default rounded-xl shadow-lg p-6"
       >
         {state.materiTerpilih ? (
-          <div ref={materiRef} className="flex justify-between flex-col h-full">
+          <div
+            ref={materiRef}
+            className="flex justify-between flex-col min-h-[20rem]"
+          >
             <div>
               <h2 className="text-2xl font-bold mb-4">
                 {state.materiTerpilih.judul}
@@ -92,11 +95,11 @@ const MateriList: React.FC<MateriListProps> = ({ dataMateri }) => {
                     ></iframe>
                   </div>
                 )}
-              <p>{state.materiTerpilih.deskripsi}</p>
+              <p className="text-sm">{state.materiTerpilih.deskripsi}</p>
             </div>
-            <div className="mt-4 w-full text-xs flex justify-center gap-4">
+            <div className="mt-4 w-full lg:text-sm text-[8px] flex justify-center gap-4">
               <Button
-                className="flex items-center gap-2 font-semibold"
+                className="flex items-center px-2  gap-2 font-semibold"
                 variant={"outline"}
                 onClick={handlePrevious}
                 disabled={state.currentIndex === 0}
@@ -104,7 +107,7 @@ const MateriList: React.FC<MateriListProps> = ({ dataMateri }) => {
                 Sebelumnya
               </Button>
               <Button
-                className={`flex items-center gap-2 font-semibold ${
+                className={`flex items-center  px-2 gap-2 font-semibold ${
                   state.isLoading ? "loading" : ""
                 }`}
                 variant={
@@ -128,7 +131,7 @@ const MateriList: React.FC<MateriListProps> = ({ dataMateri }) => {
               </Button>
 
               <Button
-                className="flex items-center gap-2 font-semibold"
+                className="flex items-center px-2 gap-2 font-semibold"
                 variant={"outline"}
                 onClick={handleNext}
                 disabled={state.currentIndex === sortedDataMateri.length - 1}

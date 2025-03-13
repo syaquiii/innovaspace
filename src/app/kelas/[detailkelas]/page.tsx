@@ -1,19 +1,19 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import DetailKelas from "../components/DetailKelas";
 import { useCourseContext } from "@/hooks/useCourseContext";
 import { Course } from "@/type/Tkelas";
 import MateriList from "../components/MateriList";
+import { useUserContext } from "@/hooks/useUserContext";
 
 const Page = () => {
   const pathname = usePathname();
   const currenPath = pathname.split("/");
   const kelasId = currenPath.length > 2 ? currenPath[2] : null;
   const { fetchCourseDetail, isLoading, error } = useCourseContext();
-
   const [dataKelas, setDataKelas] = useState<Course | null>(null);
-
+  const { userProfile } = useUserContext();
   useEffect(() => {
     const fetchData = async () => {
       if (kelasId) {
@@ -29,7 +29,9 @@ const Page = () => {
     };
     fetchData();
   }, [kelasId, fetchCourseDetail]);
-
+  if (!userProfile) {
+    redirect("/login");
+  }
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 

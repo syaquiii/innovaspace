@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/InputField";
 import { useUserContext } from "@/hooks/useUserContext";
 import { getUUIDFromToken } from "@/utils/JwtDecoder";
-import { redirect } from "next/navigation";
 import React from "react";
 
 const EditProfileComponent: React.FC = () => {
@@ -82,14 +81,6 @@ const EditProfileComponent: React.FC = () => {
         </div>
       </div>
       <div className="flex flex-col-reverse lg:flex-row justify-between gap-4 mt-4">
-        <Button
-          variant={"danger"}
-          className="lg:w-44 w-full"
-          size={"normal"}
-          onClick={() => redirect("/profile")}
-        >
-          Keluar
-        </Button>
         <div className="flex gap-4">
           <Button
             variant={"normal"}

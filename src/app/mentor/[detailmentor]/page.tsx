@@ -1,16 +1,18 @@
 "use client";
 import { useMentorContext } from "@/hooks/useMentorContext";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import ContactNow from "../components/ContactNow";
 import { Mail } from "lucide-react";
 import Image from "next/image";
 import { Mentor } from "@/type/Tmentor";
+import { useUserContext } from "@/hooks/useUserContext";
 
 const Page = () => {
   const pathname = usePathname();
   const currenPath = pathname.split("/");
   const mentorId = currenPath.length > 2 ? currenPath[2] : null;
+  const { userProfile } = useUserContext();
 
   const { fetchMentorDetails } = useMentorContext();
   const [mentorDetails, setMentorDetails] = useState<Mentor | null>(null);
@@ -25,7 +27,9 @@ const Page = () => {
 
     fetchDetails();
   }, [mentorId, fetchMentorDetails]);
-
+  if (!userProfile) {
+    redirect("/login");
+  }
   if (!mentorId || !mentorDetails) {
     return <div>Loading...</div>;
   }

@@ -1,5 +1,5 @@
+import { getTokenFromCookies } from "@/utils/getToken";
 import apiInstance from "../core/core";
-import { getTokenFromCookies } from "./user";
 const token = getTokenFromCookies();
 
 export const getAllMentors = async () => {

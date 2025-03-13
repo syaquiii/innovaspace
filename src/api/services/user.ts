@@ -1,5 +1,4 @@
 import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
 import apiInstance from "../core/core";
 
 interface UserProfile {
@@ -15,20 +14,19 @@ export const getTokenFromCookies = (): string | undefined => {
 };
 const token = getTokenFromCookies();
 
-export const fetchUserProfile = async (): Promise<UserProfile> => {
+export const fetchUserProfile = async (
+  userId: string
+): Promise<UserProfile> => {
   try {
     if (!token) {
       throw new Error("Token not found in cookies.");
     }
 
-    const decodedToken = jwtDecode<{ UserId: string; exp: number }>(token);
-    const userId = decodedToken.UserId;
     const response = await apiInstance.get(`/users/get-profile/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
     return response.data.data.profile as UserProfile;
   } catch (error) {
     console.error("Error fetching user profile:", error);

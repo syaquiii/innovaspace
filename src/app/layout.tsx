@@ -7,6 +7,7 @@ import { MentorProvider } from "@/context/MentorContext";
 import { RiwayatPembayaranProvider } from "@/context/RiwayatPembayaranContext";
 import { UserProvider } from "@/context/UserContext";
 import { CourseProvider } from "@/context/KelasContext";
+import { ThreadProvider } from "@/context/DiskusiContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,15 +28,17 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable}  font-poppins relative `}>
         <UserProvider>
-          <CourseProvider>
-            <MentorProvider>
-              <RiwayatPembayaranProvider>
-                <Navbar />
-                {children}
-                <Footer />
-              </RiwayatPembayaranProvider>
-            </MentorProvider>
-          </CourseProvider>
+          <ThreadProvider>
+            <CourseProvider>
+              <MentorProvider>
+                <RiwayatPembayaranProvider>
+                  <Navbar />
+                  {children}
+                  <Footer />
+                </RiwayatPembayaranProvider>
+              </MentorProvider>
+            </CourseProvider>
+          </ThreadProvider>
         </UserProvider>
       </body>
     </html>

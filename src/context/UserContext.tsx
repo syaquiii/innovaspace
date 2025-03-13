@@ -1,6 +1,8 @@
 "use client";
 
 import { fetchUserProfile } from "@/api/services/user";
+import { getTokenFromCookies } from "@/utils/getToken";
+import { jwtDecode } from "jwt-decode";
 import React, { createContext, useEffect, useState } from "react";
 
 export interface UserProfile {
@@ -33,11 +35,19 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const getUserProfile = async () => {
       try {
-        const profileData = await fetchUserProfile();
+        const token = getTokenFromCookies();
+        if (!token) {
+          throw new Error("Token not found in cookies.");
+        }
+
+        const decodedToken = jwtDecode<{ UserId: string; exp: number }>(token);
+        const userId = decodedToken.UserId;
+
+        const profileData = await fetchUserProfile(userId);
         setUserProfile(profileData);
       } catch (error) {
         setError("Failed to fetch user profile.");
-        throw error;
+        console.error("Error fetching user profile:", error);
       } finally {
         setLoading(false);
       }
