@@ -1,5 +1,5 @@
+import { Course } from "@/type/Tkelas";
 import { useState, useEffect } from "react";
-import { Course } from "@/type/TDummyData";
 
 export const useFilter = (
   courses: Course[],
@@ -8,18 +8,21 @@ export const useFilter = (
   const [filters, setFilters] = useState<{ [key: string]: string | null }>({
     category: null,
     difficulty: null,
-    duration: null,
+    durasi: null,
   });
 
   const [isFilteredDataEmpty, setIsFilteredDataEmpty] = useState(false);
 
   useEffect(() => {
     const filtered = courses.filter((course) => {
+      const courseDuration = Number(course.durasi);
+      const filterDuration = filters.durasi ? Number(filters.durasi) : null;
+
       return (
         (!filters.category || course.kategori === filters.category) &&
         (!filters.difficulty ||
           course.tingkat_kesulitan === filters.difficulty) &&
-        (!filters.duration || course.duration < filters.duration)
+        (filterDuration === null || courseDuration < filterDuration)
       );
     });
 

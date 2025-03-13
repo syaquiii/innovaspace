@@ -21,16 +21,14 @@ export const fetchUserProfile = async (): Promise<UserProfile> => {
       throw new Error("Token not found in cookies.");
     }
 
-    // Decode the token to get UserId
     const decodedToken = jwtDecode<{ UserId: string; exp: number }>(token);
     const userId = decodedToken.UserId;
-
     const response = await apiInstance.get(`/users/get-profile/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-
+    console.log(response);
     return response.data.data.profile as UserProfile;
   } catch (error) {
     console.error("Error fetching user profile:", error);

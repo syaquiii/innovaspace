@@ -18,9 +18,7 @@ const Page = () => {
   useEffect(() => {
     const fetchDetails = async () => {
       if (mentorId) {
-        console.log("Fetching details for mentor ID:", mentorId);
         const details = await fetchMentorDetails(mentorId);
-        console.log("Fetched mentor details:", details);
         setMentorDetails(details);
       }
     };

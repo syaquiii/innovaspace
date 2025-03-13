@@ -1,4 +1,4 @@
-import { Course } from "@/type/TDummyData";
+import { Course } from "@/type/Tkelas";
 import { Mentor } from "@/type/Tmentor";
 
 export const handleCourseSearch = (

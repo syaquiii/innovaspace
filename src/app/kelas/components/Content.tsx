@@ -1,8 +1,8 @@
 import React from "react";
 import KelasCard from "./KelasCard";
 import Link from "next/link";
-import { Course } from "@/type/TDummyData";
 import NotFoundCourse from "@/components/notfound/NotFoundData";
+import { Course } from "@/type/Tkelas";
 interface ContentProps {
   courses: Course[];
 }
@@ -15,7 +15,7 @@ const Content: React.FC<ContentProps> = ({ courses }) => {
       <div className="lg:flex w-full  lg:w-full  justify-between gap-8 ">
         <div className="w-full grid-cols-1 grid lg:w-full lg:grid-cols-2 gap-10">
           {courses.map((item) => (
-            <Link key={item.id_course} href={`/kelas/${item.id_course}`}>
+            <Link key={item.kelas_id} href={`/kelas/${item.kelas_id}`}>
               <KelasCard kelas={item} />
             </Link>
           ))}

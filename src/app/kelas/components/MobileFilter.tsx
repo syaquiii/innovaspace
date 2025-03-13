@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Course } from "@/type/TDummyData";
 import { Settings, X } from "lucide-react";
 import { Filter } from "./Filter";
+import { Course } from "@/type/Tkelas";
 
 interface MobileFilterProps {
   courses: Course[];

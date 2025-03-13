@@ -3,10 +3,10 @@ import { Poppins } from "next/font/google";
 import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { KelasProvider } from "@/context/KelasContext";
 import { MentorProvider } from "@/context/MentorContext";
 import { RiwayatPembayaranProvider } from "@/context/RiwayatPembayaranContext";
 import { UserProvider } from "@/context/UserContext";
+import { CourseProvider } from "@/context/KelasContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable}  font-poppins relative `}>
         <UserProvider>
-          <KelasProvider>
+          <CourseProvider>
             <MentorProvider>
               <RiwayatPembayaranProvider>
                 <Navbar />
@@ -35,7 +35,7 @@ export default function RootLayout({
                 <Footer />
               </RiwayatPembayaranProvider>
             </MentorProvider>
-          </KelasProvider>
+          </CourseProvider>
         </UserProvider>
       </body>
     </html>

@@ -1,25 +1,30 @@
-import { useReducer, useRef } from "react";
-import { Materi } from "@/type/TDummyData";
+import { updateProgress } from "@/api/services/course";
+import { Materi } from "@/type/Tkelas";
+import { useReducer, useRef, useEffect } from "react";
 
 interface State {
-  openMateriId: number | null;
+  openMateriId: string | null;
   materiTerpilih: Materi | null;
   currentIndex: number;
-  isFinished: boolean;
+  isFinished: { [key: string]: boolean };
+  isLoading: boolean;
 }
 
 type Action =
-  | { type: "TOGGLE_MATERI"; payload: number }
+  | { type: "TOGGLE_MATERI"; payload: string }
   | { type: "SET_MATERI"; payload: Materi }
   | { type: "NEXT_MATERI" }
   | { type: "PREVIOUS_MATERI" }
-  | { type: "FINISH"; payload: boolean };
+  | { type: "FINISH"; payload: { materi_id: string; finished: boolean } }
+  | { type: "SET_LOADING"; payload: boolean }
+  | { type: "SET_STATE"; payload: Partial<State> };
 
 const initialState: State = {
   openMateriId: null,
   materiTerpilih: null,
   currentIndex: 0,
-  isFinished: false,
+  isFinished: {},
+  isLoading: false,
 };
 
 const reducer = (state: State, action: Action, dataMateri: Materi[]): State => {
@@ -37,12 +42,10 @@ const reducer = (state: State, action: Action, dataMateri: Materi[]): State => {
       };
     case "NEXT_MATERI":
       const nextIndex = state.currentIndex + 1;
-      const isFinished = nextIndex >= dataMateri.length - 1;
       return {
         ...state,
         currentIndex: nextIndex,
         materiTerpilih: dataMateri[nextIndex],
-        isFinished,
       };
     case "PREVIOUS_MATERI":
       const prevIndex = state.currentIndex - 1;
@@ -50,12 +53,26 @@ const reducer = (state: State, action: Action, dataMateri: Materi[]): State => {
         ...state,
         currentIndex: prevIndex,
         materiTerpilih: dataMateri[prevIndex],
-        isFinished: false,
       };
     case "FINISH":
+      const newIsFinished = {
+        ...state.isFinished,
+        [action.payload.materi_id]: action.payload.finished,
+      };
+      localStorage.setItem("isFinished", JSON.stringify(newIsFinished));
       return {
         ...state,
-        isFinished: action.payload,
+        isFinished: newIsFinished,
+      };
+    case "SET_LOADING":
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
+    case "SET_STATE":
+      return {
+        ...state,
+        ...action.payload,
       };
     default:
       return state;
@@ -65,18 +82,27 @@ const reducer = (state: State, action: Action, dataMateri: Materi[]): State => {
 const useMateriReducer = (dataMateri: Materi[]) => {
   const [state, dispatch] = useReducer(
     (state: State, action: Action) => reducer(state, action, dataMateri),
-    initialState
+    initialState,
+    (initial) => {
+      const savedState = localStorage.getItem("materiState");
+      return savedState ? { ...initial, ...JSON.parse(savedState) } : initial;
+    }
   );
 
   const materiRef = useRef<HTMLDivElement | null>(null);
 
-  const handleMateriClick = (idMateri: number) => {
-    const materi = dataMateri.find((m) => m.id_materi === idMateri);
+  useEffect(() => {
+    localStorage.setItem("materiState", JSON.stringify(state));
+  }, [state]);
+
+  const handleMateriClick = (idMateri: string) => {
+    const materi = dataMateri.find((m) => m.materi_id === idMateri);
     if (materi) {
       dispatch({ type: "SET_MATERI", payload: materi });
-
-      // Reset isFinished when a new materi is selected manually
-      dispatch({ type: "FINISH", payload: false });
+      dispatch({
+        type: "FINISH",
+        payload: { materi_id: idMateri, finished: false },
+      });
 
       if (materiRef.current) {
         materiRef.current.scrollIntoView({
@@ -89,7 +115,7 @@ const useMateriReducer = (dataMateri: Materi[]) => {
     }
   };
 
-  const toggleMateri = (idMateri: number) => {
+  const toggleMateri = (idMateri: string) => {
     dispatch({ type: "TOGGLE_MATERI", payload: idMateri });
   };
 
@@ -99,18 +125,14 @@ const useMateriReducer = (dataMateri: Materi[]) => {
       const nextMateri = dataMateri[nextIndex];
       dispatch({ type: "NEXT_MATERI" });
 
-      // Buka materi berikutnya
-      toggleMateri(nextMateri.id_materi);
+      toggleMateri(nextMateri.materi_id);
 
-      // Scroll ke elemen yang direferensikan
       if (materiRef.current) {
         materiRef.current.scrollIntoView({
           behavior: "smooth",
           block: "center",
         });
       }
-    } else {
-      dispatch({ type: "FINISH", payload: true });
     }
   };
 
@@ -120,10 +142,8 @@ const useMateriReducer = (dataMateri: Materi[]) => {
       const prevMateri = dataMateri[prevIndex];
       dispatch({ type: "PREVIOUS_MATERI" });
 
-      // Buka materi sebelumnya
-      toggleMateri(prevMateri.id_materi);
+      toggleMateri(prevMateri.materi_id);
 
-      // Scroll ke elemen yang direferensikan
       if (materiRef.current) {
         materiRef.current.scrollIntoView({
           behavior: "smooth",
@@ -133,12 +153,21 @@ const useMateriReducer = (dataMateri: Materi[]) => {
     }
   };
 
+  const handleFinish = async (materi_id: string) => {
+    dispatch({ type: "SET_LOADING", payload: true });
+    await updateProgress(materi_id);
+    dispatch({ type: "SET_LOADING", payload: false });
+    dispatch({ type: "FINISH", payload: { materi_id, finished: true } });
+  };
+
   return {
+    dispatch,
     state,
     handleMateriClick,
     toggleMateri,
     handleNext,
     handlePrevious,
+    handleFinish,
     materiRef,
   };
 };

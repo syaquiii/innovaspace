@@ -1,9 +1,9 @@
 import React from "react";
-import { Course } from "@/type/TDummyData";
 import { FilterButton } from "./FilterButton";
 import { FilterDataCourse } from "@/data/FilterData";
 import { getDurationLabel } from "@/utils/durationLabels";
 import { useFilter } from "@/hooks/useFilterCourse";
+import { Course } from "@/type/Tkelas";
 
 interface FilterProps {
   courses: Course[];
@@ -51,8 +51,8 @@ export const Filter: React.FC<FilterProps> = ({
             <FilterButton
               key={duration}
               label={getDurationLabel(duration)}
-              active={filters.duration === duration.toString()}
-              onClick={() => handleClick("duration", duration.toString())}
+              active={filters.durasi === duration.toString()}
+              onClick={() => handleClick("durasi", duration.toString())}
             />
           ))}
         </div>

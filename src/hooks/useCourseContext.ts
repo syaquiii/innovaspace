@@ -1,9 +1,9 @@
 "use client";
-import KelasContext from "@/context/KelasContext";
+import { CourseContext } from "@/context/KelasContext";
 import { useContext } from "react";
 
-export const useKelasContext = () => {
-  const context = useContext(KelasContext);
+export const useCourseContext = () => {
+  const context = useContext(CourseContext);
   if (!context) {
     throw new Error("ProgressContext must be used within a ProgressProvider");
   }

@@ -1,3 +1,3 @@
 export const getDurationLabel = (duration: number): string => {
-  return `<${duration}`;
+  return `~ ${duration} jam`;
 };
