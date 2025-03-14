@@ -19,7 +19,7 @@ const CommentList: React.FC<CommentListProps> = ({ comments }) => {
             <div className="flex gap-2 items-center">
               <div className="w-6 h-6 bg-blue-400 rounded-full"></div>
               <div className="flex flex-col">
-                <span className="font-bold">{comment.username}</span>
+                <span className="font-bold">@{comment.username}</span>
                 <span className="text-xs">{comment.tanggal}</span>
               </div>
             </div>
