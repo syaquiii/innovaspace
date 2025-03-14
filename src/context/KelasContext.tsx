@@ -42,7 +42,6 @@ export const CourseProvider: React.FC<CourseProviderProps> = ({ children }) => {
     const fetchCourses = async () => {
       try {
         const response = await getAllCourses();
-        console.log("API response:", response.data);
         if (response.data) {
           setCourses(response.data);
         } else {

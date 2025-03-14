@@ -10,7 +10,6 @@ import EmptyCard from "./EmptyCard";
 const AllThreads: React.FC = () => {
   const { state } = useThreadContext();
   const { userProfile } = useUserContext();
-
   if (!userProfile) {
     return (
       <div className="w-full  rounded-xl relative mt-4">
@@ -34,15 +33,21 @@ const AllThreads: React.FC = () => {
 
   return (
     <div className="w-full rounded-xl ">
-      {state.loading ? (
+      {state === null ? (
+        <div>Belum ada threads, yuk buat threads</div>
+      ) : state.loading ? (
         <p>Loading...</p>
       ) : state.error ? (
         <p>Error: {state.error}</p>
       ) : (
         <ul className="flex flex-col gap-10">
-          {state.threads.map((thread, index) => (
-            <ThreadCard key={index} thread={thread} />
-          ))}
+          {state.threads ? (
+            state.threads.map((thread, index) => (
+              <ThreadCard key={index} thread={thread} />
+            ))
+          ) : (
+            <p>Belum ada threads, yuk buat threads</p>
+          )}
         </ul>
       )}
     </div>

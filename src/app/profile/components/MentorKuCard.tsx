@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Button";
-import { Mentor } from "@/type/TDummyData";
+import { Mentor } from "@/type/Tmentor";
 import React from "react";
 
 type MentorKuCardProps = {
@@ -13,7 +13,7 @@ const MentorKuCard: React.FC<MentorKuCardProps> = ({ mentor }) => {
         <div className="lg:w-1/4 w-2/3 aspect-square rounded-full  bg-normal-default"></div>
         <div className="lg:w-3/4">
           <h4 className="text-4xl font-bold">{mentor.nama}</h4>
-          <p className="text-sm text-justify mt-4 ">{mentor.detail}</p>
+          <p className="text-sm text-justify mt-4 ">{mentor.keahlian}</p>
         </div>
       </div>
       <Button className="mt-4">Hubungi</Button>

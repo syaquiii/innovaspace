@@ -1,18 +1,21 @@
-// import React from "react";
-// import MentorKuCard from "./MentorKuCard";
-// import { useMentorContext } from "@/hooks/useMentorContext";
+import React from "react";
+import MentorKuCard from "./MentorKuCard";
+import { Mentor } from "@/type/Tmentor";
 
-// const MentorKu = () => {
-//   const { getMentorForUser } = useMentorContext();
-//   const mentor = getMentorForUser(1); //will be update based on user
-//   if (!mentor) {
-//     return <div>Mentor not found for this user.</div>;
-//   }
-//   return (
-//     <div>
-//       <MentorKuCard mentor={mentor} />
-//     </div>
-//   );
-// };
+interface MentorKuProps {
+  mentor: Mentor;
+}
 
-// export default MentorKu;
+const MentorKu: React.FC<MentorKuProps> = ({ mentor }) => {
+  if (!mentor) {
+    return <div>Kamu belum memiliki mentor</div>;
+  }
+
+  return (
+    <div>
+      <MentorKuCard mentor={mentor} />
+    </div>
+  );
+};
+
+export default MentorKu;

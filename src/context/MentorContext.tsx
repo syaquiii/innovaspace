@@ -42,11 +42,9 @@ export const MentorProvider: React.FC<MentorProviderProps> = ({ children }) => {
     const fetchMentors = async () => {
       try {
         const response = await getAllMentors();
-        console.log("API response:", response.data);
         if (response.data && response.data.mentor) {
           setMentors(response.data.mentor);
         } else {
-          console.error("Unexpected API response structure", response.data);
           setError(new Error("Unexpected API response structure"));
         }
       } catch (error) {

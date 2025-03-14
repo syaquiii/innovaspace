@@ -43,6 +43,7 @@ export const register = async (
       institusi: " ",
       preferensi: " ",
     });
+    console.log("INI RESPONSE NYA", response);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -54,7 +55,7 @@ export const register = async (
           );
         } else if (axiosError.response.status === 400) {
           throw new Error(
-            axiosError.response.data.error || "Invalid request data"
+            axiosError.response.data.error || "Email sudah digunakan"
           );
         } else {
           throw new Error(

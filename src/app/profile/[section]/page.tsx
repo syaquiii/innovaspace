@@ -3,16 +3,23 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 // import KelasKu from "../components/KelasKu";
-// import MentorKu from "../components/MentorKu";
 import Pembayaran from "../components/Pembayaran";
+import { useUserContext } from "@/hooks/useUserContext";
+// import MentorKu from "../components/MentorKu";
 const Page = () => {
   const pathname = usePathname();
+  const { userProfile } = useUserContext();
+  const data = userProfile;
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+  console.log(data);
   const renderComponent = () => {
     switch (pathname) {
       // case "/profile/kelasku":
-      //   return <KelasKu />;
+      //   return <KelasKu kelas={data.kelas} />;
       // case "/profile/mentorku":
-      //   // return <MentorKu />;
+      //   return <MentorKu mentor={data.mentor} />;
       case "/profile/history":
         return <Pembayaran />;
       default:

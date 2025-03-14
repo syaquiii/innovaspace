@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import apiInstance from "../core/core";
+import { Mentor } from "@/type/Tmentor";
 
 interface UserProfile {
   nama: string;
@@ -7,12 +8,17 @@ interface UserProfile {
   email: string;
   preferensi: string;
   institusi: string;
+  mentor_id: string;
+  mentor: Mentor[];
+  kelas: string | null;
+  is_premium: boolean;
 }
 
 export const getTokenFromCookies = (): string | undefined => {
   return Cookies.get("token");
 };
 const token = getTokenFromCookies();
+console.log(token);
 
 export const fetchUserProfile = async (
   userId: string
@@ -27,7 +33,7 @@ export const fetchUserProfile = async (
         Authorization: `Bearer ${token}`,
       },
     });
-    return response.data.data.profile as UserProfile;
+    return response.data.data as UserProfile;
   } catch (error) {
     console.error("Error fetching user profile:", error);
     throw error;

@@ -1,16 +1,20 @@
 "use client";
 
 import { fetchUserProfile } from "@/api/services/user";
+import { Mentor } from "@/type/Tmentor";
 import { getTokenFromCookies } from "@/utils/getToken";
 import { jwtDecode } from "jwt-decode";
 import React, { createContext, useEffect, useState } from "react";
-
 export interface UserProfile {
   nama: string;
   username: string;
   email: string;
   preferensi: string;
   institusi: string;
+  mentor_id: string;
+  mentor: Mentor[];
+  kelas: string | null;
+  is_premium: boolean; // Add this line
 }
 
 interface UserContextProps {
@@ -42,7 +46,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 
         const decodedToken = jwtDecode<{ UserId: string; exp: number }>(token);
         const userId = decodedToken.UserId;
-
         const profileData = await fetchUserProfile(userId);
         setUserProfile(profileData);
       } catch (error) {

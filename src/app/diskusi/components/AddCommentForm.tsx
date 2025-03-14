@@ -31,7 +31,7 @@ const AddCommentForm: React.FC<AddCommentProps> = ({ thread_id }) => {
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         placeholder="Komentari Thread ini"
-        className="w-full p-2 resize-none border border-gray-300 rounded"
+        className="w-full p-2 resize-none border  rounded-lg shadow mb-4"
       />
       <div className="w-full flex justify-end">
         <Button

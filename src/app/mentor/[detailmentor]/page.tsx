@@ -12,12 +12,15 @@ const Page = () => {
   const pathname = usePathname();
   const currenPath = pathname.split("/");
   const mentorId = currenPath.length > 2 ? currenPath[2] : null;
-  const { userProfile } = useUserContext();
+  const { userProfile, loading } = useUserContext();
 
   const { fetchMentorDetails } = useMentorContext();
   const [mentorDetails, setMentorDetails] = useState<Mentor | null>(null);
 
   useEffect(() => {
+    if (userProfile === null && !loading) {
+      redirect("/login");
+    }
     const fetchDetails = async () => {
       if (mentorId) {
         const details = await fetchMentorDetails(mentorId);
@@ -26,10 +29,8 @@ const Page = () => {
     };
 
     fetchDetails();
-  }, [mentorId, fetchMentorDetails]);
-  if (!userProfile) {
-    redirect("/login");
-  }
+  }, [mentorId, fetchMentorDetails, loading, userProfile]);
+
   if (!mentorId || !mentorDetails) {
     return <div>Loading...</div>;
   }

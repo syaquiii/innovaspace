@@ -25,11 +25,7 @@ export const createThread = async (kategori: string, isi: string) => {
 
 export const getAllThreads = async () => {
   try {
-    const response = await apiInstance.get(`/threads/show-all-thread`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await apiInstance.get(`/threads/show-all-thread`);
     return response.data.data;
   } catch (error) {
     console.error("Error fetching threads:", error);

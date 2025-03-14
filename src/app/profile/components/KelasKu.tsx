@@ -1,16 +1,23 @@
 // import React from "react";
 // import KelaskuCard from "./KelaskuCard";
-// import { useCourseContext } from "@/hooks/useCourseContext";
 
-// const KelasKu = () => {
-//   const { progressBelajar } = useCourseContext();
-//   console.log(progressBelajar);
+// interface KelasKuProps {
+//   kelas: string | string[] | null;
+// }
+
+// const KelasKu: React.FC<KelasKuProps> = ({ kelas }) => {
+//   if (kelas?.length === 0) {
+//     return <p>Kamu belum enroll kelas</p>;
+//   }
+
 //   return (
 //     <div className="">
 //       <div className="flex flex-col gap-10">
-//         {progressBelajar.map((item, index) => (
-//           <KelaskuCard kelas={item} key={index} />
-//         ))}
+//         {Array.isArray(kelas) ? (
+//           kelas.map((item, index) => <KelaskuCard kelas={item} key={index} />)
+//         ) : (
+//           <KelaskuCard kelas={kelas} /> // Handle single string case
+//         )}
 //       </div>
 //     </div>
 //   );

@@ -8,7 +8,7 @@ import React, {
   FC,
   useCallback,
 } from "react";
-import { Thread, Comment } from "@/type/TThread";
+import { Thread, Comment, CreateCommentResponse } from "@/type/TThread";
 import {
   createThread,
   getAllThreads,
@@ -174,14 +174,14 @@ export const ThreadProvider: FC<ThreadProviderProps> = ({ children }) => {
     }
     dispatch({ type: "CREATE_COMMENT_REQUEST" });
     try {
-      const newCommentResponse = await createComment(
+      const newCommentResponse: CreateCommentResponse = await createComment(
         thread_id,
         state.userId,
         isi_komentar
       );
       dispatch({
         type: "CREATE_COMMENT_SUCCESS",
-        payload: { comment: newCommentResponse.data.comment, thread_id },
+        payload: { comment: newCommentResponse.comment, thread_id },
       });
     } catch (error) {
       dispatch({ type: "CREATE_COMMENT_FAILURE", payload: error });

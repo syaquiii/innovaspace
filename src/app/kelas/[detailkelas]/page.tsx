@@ -13,8 +13,11 @@ const Page = () => {
   const kelasId = currenPath.length > 2 ? currenPath[2] : null;
   const { fetchCourseDetail, isLoading, error } = useCourseContext();
   const [dataKelas, setDataKelas] = useState<Course | null>(null);
-  const { userProfile } = useUserContext();
+  const { userProfile, loading } = useUserContext();
   useEffect(() => {
+    if (userProfile === null && !loading) {
+      redirect("/login");
+    }
     const fetchData = async () => {
       if (kelasId) {
         try {
@@ -28,10 +31,8 @@ const Page = () => {
       }
     };
     fetchData();
-  }, [kelasId, fetchCourseDetail]);
-  if (!userProfile) {
-    redirect("/login");
-  }
+  }, [kelasId, fetchCourseDetail, loading, userProfile]);
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 

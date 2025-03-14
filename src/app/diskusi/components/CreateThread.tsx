@@ -13,6 +13,7 @@ const CreateThread: React.FC = () => {
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
+  const [error, setError] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleChange = (
@@ -39,7 +40,7 @@ const CreateThread: React.FC = () => {
         setLoading(false);
       }
     } else {
-      console.error("User is not authenticated");
+      setError("Kamu harus login untuk membuat threads!");
     }
   };
 
@@ -82,6 +83,11 @@ const CreateThread: React.FC = () => {
       </form>
       {success && (
         <div className="mt-4 text-green-600">Thread berhasil dibuat!</div>
+      )}
+      {error && (
+        <div className="mt-4 text-red-600">
+          Kamu harus login untuk membuat threads
+        </div>
       )}
     </div>
   );

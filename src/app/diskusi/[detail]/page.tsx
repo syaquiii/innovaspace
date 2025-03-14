@@ -46,10 +46,10 @@ const Page = () => {
       <div className="mycontainer">
         <div className="bg-light-default min-h-[40rem] ">
           <ThreadCard key={data.thread_id} thread={data} />
-          <div className="border-t-2  border-gray-400 mx-8 font-bold">
+          <AddCommentForm thread_id={data.thread_id} />
+          <div className="border-t-2 mt-8 border-gray-400 mx-8 font-bold">
             <h1 className="mt-4">Komentar</h1>
           </div>
-          <AddCommentForm thread_id={data.thread_id} />
           <CommentList comments={data.comments} />
         </div>
       </div>

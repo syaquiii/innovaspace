@@ -1,9 +1,15 @@
 "use client";
 import { updateUserProfile } from "@/api/services/user";
-import { UserProfile } from "@/context/UserContext";
 import { useUpdateForm } from "@/hooks/useUpdateForm";
 import { useState } from "react";
 
+interface UserProfile {
+  nama: string;
+  username: string;
+  email: string;
+  preferensi: string;
+  institusi: string;
+}
 const HandleUpdateUser = (initialProfile: UserProfile | null) => {
   const { formState, handleInputChange } = useUpdateForm<UserProfile>(
     initialProfile || {
