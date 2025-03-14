@@ -5,7 +5,7 @@ import Link from "next/link";
 const ThreadCard: React.FC<{ thread: Thread }> = ({ thread }) => {
   return (
     <Link href={`/diskusi/${thread.thread_id}`}>
-      <div className="p-8 bg-light-default  rounded-lg min-h-40">
+      <div className="p-8  bg-light-default  rounded-lg min-h-40">
         <div className="flex items-center gap-4">
           <div className="w-10 h-10 rounded-full bg-blue-400"></div>
           <div className="flex flex-col">

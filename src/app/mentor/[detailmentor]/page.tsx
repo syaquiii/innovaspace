@@ -47,7 +47,6 @@ const Page = () => {
   const keahlian: string[] = mentorDetails.keahlian
     ? JSON.parse(mentorDetails.keahlian)
     : [];
-
   return (
     <div className="min-h-screen bg-langganan">
       <div className="mycontainer py-24 lg:py-52">
@@ -134,7 +133,7 @@ const Page = () => {
             </div>
           </div>
         </div>
-        <ContactNow />
+        <ContactNow mentorId={mentorId} />
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ const DetailKelas: FC<DetailKelas> = ({ data }) => {
               height={100}
             />
           </div>
-          <div className="flex lg:justify-between text-xs lg:text-sm gap-4 mt-4">
+          <div className="flex text-xs lg:text-sm gap-4 mt-4">
             <span className="bg-normal-default  px-2 py-1 text-white rounded-lg">
               {data.kategori}
             </span>
@@ -54,12 +54,7 @@ const DetailKelas: FC<DetailKelas> = ({ data }) => {
               {data.deskripsi}
             </p>
           </div>
-          <Button
-            disabled
-            className="w-full"
-            size={"normal"}
-            onClick={handleEnroll}
-          >
+          <Button className="w-full" size={"normal"} onClick={handleEnroll}>
             Enroll
           </Button>
         </div>

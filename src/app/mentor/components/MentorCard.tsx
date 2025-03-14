@@ -12,7 +12,7 @@ const MentorCard: React.FC<MentorCardProps> = ({ mentor }) => {
     <div className="w-full flex-col justify-between hover:bg-light-hover transition-all hover:scale-105 gap-2 h-[20rem] flex rounded-xl shadow-lg bg-light-default p-3 lg:p-4">
       <div className="w-full overflow-hidden  h-2/3   rounded-lg bg-normal-default">
         <Image
-          className="w-full object-top"
+          className="w-full h-full object-cover object-top "
           width={200}
           height={200}
           alt="mentor"

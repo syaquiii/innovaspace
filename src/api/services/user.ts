@@ -18,7 +18,6 @@ export const getTokenFromCookies = (): string | undefined => {
   return Cookies.get("token");
 };
 const token = getTokenFromCookies();
-console.log(token);
 
 export const fetchUserProfile = async (
   userId: string

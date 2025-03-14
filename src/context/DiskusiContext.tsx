@@ -14,9 +14,9 @@ import {
   getAllThreads,
   getThreadDetail,
 } from "@/api/services/threads";
-import { jwtDecode } from "jwt-decode";
 import { createComment } from "@/api/services/comment";
 import { getTokenFromCookies } from "@/utils/getToken";
+import { jwtDecode } from "jwt-decode";
 
 interface State {
   threads: Thread[];
@@ -61,22 +61,36 @@ type Action =
   | { type: "CREATE_COMMENT_FAILURE"; payload: unknown }
   | { type: "SET_USER_ID"; payload: string };
 
+const parseDate = (dateString: string) => {
+  if (!dateString) return new Date(0); // Handle undefined or empty date
+  const [datePart, timePart] = dateString.split(" ");
+  if (!datePart || !timePart) return new Date(0); // Handle improper format
+  const [day, month, year] = datePart.split("/").map(Number);
+  if (isNaN(day) || isNaN(month) || isNaN(year)) return new Date(0); // Handle invalid date parts
+  return new Date(year, month - 1, day, ...timePart.split(":").map(Number));
+};
+
 const threadReducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
     case "FETCH_THREADS_REQUEST":
       return { ...state, loading: true, error: null };
     case "FETCH_THREADS_SUCCESS":
-      return { ...state, loading: false, threads: action.payload };
+      return {
+        ...state,
+        loading: false,
+        threads: action.payload
+          .filter((thread) => thread.tanggal) // Ensure tanggal is defined
+          .sort(
+            (a, b) =>
+              parseDate(b.tanggal).getTime() - parseDate(a.tanggal).getTime()
+          ),
+      };
     case "FETCH_THREADS_FAILURE":
       return { ...state, loading: false, error: String(action.payload) };
     case "CREATE_THREAD_REQUEST":
       return { ...state, loading: true, error: null };
     case "CREATE_THREAD_SUCCESS":
-      return {
-        ...state,
-        loading: false,
-        threads: [action.payload, ...state.threads],
-      };
+      return { ...state, loading: false }; // No need to update threads here
     case "CREATE_THREAD_FAILURE":
       return { ...state, loading: false, error: String(action.payload) };
     case "FETCH_THREAD_DETAIL_REQUEST":
@@ -85,7 +99,11 @@ const threadReducer = (state: State = initialState, action: Action): State => {
       return {
         ...state,
         loading: false,
-        threads: [action.payload, ...state.threads],
+        threads: state.threads.map((thread) =>
+          thread.thread_id === action.payload.thread_id
+            ? { ...action.payload }
+            : thread
+        ),
       };
     case "FETCH_THREAD_DETAIL_FAILURE":
       return { ...state, loading: false, error: String(action.payload) };
@@ -129,28 +147,25 @@ export const ThreadProvider: FC<ThreadProviderProps> = ({ children }) => {
     }
   }, []);
 
-  useEffect(() => {
-    const fetchThreads = async () => {
-      dispatch({ type: "FETCH_THREADS_REQUEST" });
-      try {
-        const data = await getAllThreads();
-        dispatch({ type: "FETCH_THREADS_SUCCESS", payload: data });
-      } catch (error) {
-        dispatch({ type: "FETCH_THREADS_FAILURE", payload: error });
-      }
-    };
+  const fetchThreads = async () => {
+    dispatch({ type: "FETCH_THREADS_REQUEST" });
+    try {
+      const data = await getAllThreads();
+      dispatch({ type: "FETCH_THREADS_SUCCESS", payload: data });
+    } catch (error) {
+      dispatch({ type: "FETCH_THREADS_FAILURE", payload: error });
+    }
+  };
 
+  useEffect(() => {
     fetchThreads();
   }, []);
 
   const addThread = async (kategori: string, isi: string) => {
     dispatch({ type: "CREATE_THREAD_REQUEST" });
     try {
-      const newThreadResponse = await createThread(kategori, isi);
-      dispatch({
-        type: "CREATE_THREAD_SUCCESS",
-        payload: newThreadResponse.data,
-      });
+      await createThread(kategori, isi);
+      await fetchThreads(); // Fetch all threads again after adding a new thread
     } catch (error) {
       dispatch({ type: "CREATE_THREAD_FAILURE", payload: error });
     }
@@ -193,6 +208,7 @@ export const ThreadProvider: FC<ThreadProviderProps> = ({ children }) => {
       value={{ state, addThread, fetchThreadDetail, addComment }}
     >
       {children}
+      {state.loading && <div>Loading...</div>} {/* Loading indicator */}
     </ThreadContext.Provider>
   );
 };
