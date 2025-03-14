@@ -1,6 +1,7 @@
 "use client";
 
 import { fetchUserProfile } from "@/api/services/user";
+import { Course } from "@/type/Tkelas";
 import { Mentor } from "@/type/Tmentor";
 import { getTokenFromCookies } from "@/utils/getToken";
 import { jwtDecode } from "jwt-decode";
@@ -14,16 +15,9 @@ export interface UserProfile {
   institusi: string;
   mentor_id: string;
   mentor: Mentor[];
-  kelas: {
-    kelas_id: string;
-    nama: string;
-    deskripsi: string;
-    kategori: string;
-    jumlah_materi: number;
-  }[];
+  kelas: Course[];
   is_premium: boolean;
 }
-
 interface UserContextProps {
   userProfile: UserProfile | null;
   loading: boolean;

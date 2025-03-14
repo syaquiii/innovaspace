@@ -21,7 +21,9 @@ const DetailKelas: FC<DetailKelas> = ({ data }) => {
   const { isUserEnrolled, userProfile } = useContext(UserContext);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const alreadyEnrolled = isUserEnrolled(data.kelas_id);
+  const [enrolled, setEnrolled] = useState<boolean>(
+    isUserEnrolled(data.kelas_id)
+  );
 
   const handleEnroll = async () => {
     if (!userProfile) return;
@@ -31,7 +33,9 @@ const DetailKelas: FC<DetailKelas> = ({ data }) => {
         kelas_id: data.kelas_id,
       };
       const response = await enrollUser(enrollRequest);
+      console.log("Enroll response:", response.message); // Debugging log
       setSuccess(response.message);
+      setEnrolled(true); // Update enrollment status to true
       setError(null); // Clear any previous errors
     } catch (err) {
       const error = err as ApiError;
@@ -81,7 +85,7 @@ const DetailKelas: FC<DetailKelas> = ({ data }) => {
               {data.deskripsi}
             </p>
           </div>
-          {alreadyEnrolled ? (
+          {enrolled ? (
             <Button className="w-full" size={"normal"} disabled>
               Sudah Terdaftar
             </Button>

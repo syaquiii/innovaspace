@@ -9,7 +9,7 @@ const ThreadCard: React.FC<{ thread: Thread }> = ({ thread }) => {
         <div className="flex items-center gap-4">
           <div className="w-10 h-10 rounded-full bg-blue-400"></div>
           <div className="flex flex-col">
-            <span className="font-bold">{thread.username}</span>
+            <span className="font-bold">@{thread.username}</span>
             <span className="text-xs">{thread.tanggal}</span>
           </div>
         </div>

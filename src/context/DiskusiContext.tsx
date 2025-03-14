@@ -66,7 +66,7 @@ const parseDate = (dateString: string) => {
   const [datePart, timePart] = dateString.split(" ");
   if (!datePart || !timePart) return new Date(0); // Handle improper format
   const [day, month, year] = datePart.split("/").map(Number);
-  if (isNaN(day) || isNaN(month) || isNaN(year)) return new Date(0); // Handle invalid date parts
+  if (isNaN(day) || isNaN(month) || isNaN(year)) return new Date(0); // Handle invalid date
   return new Date(year, month - 1, day, ...timePart.split(":").map(Number));
 };
 
@@ -78,8 +78,8 @@ const threadReducer = (state: State = initialState, action: Action): State => {
       return {
         ...state,
         loading: false,
-        threads: action.payload
-          .filter((thread) => thread.tanggal) // Ensure tanggal is defined
+        threads: (action.payload || [])
+          .filter((thread) => thread.tanggal)
           .sort(
             (a, b) =>
               parseDate(b.tanggal).getTime() - parseDate(a.tanggal).getTime()
@@ -90,7 +90,7 @@ const threadReducer = (state: State = initialState, action: Action): State => {
     case "CREATE_THREAD_REQUEST":
       return { ...state, loading: true, error: null };
     case "CREATE_THREAD_SUCCESS":
-      return { ...state, loading: false }; // No need to update threads here
+      return { ...state, loading: false };
     case "CREATE_THREAD_FAILURE":
       return { ...state, loading: false, error: String(action.payload) };
     case "FETCH_THREAD_DETAIL_REQUEST":
@@ -165,7 +165,7 @@ export const ThreadProvider: FC<ThreadProviderProps> = ({ children }) => {
     dispatch({ type: "CREATE_THREAD_REQUEST" });
     try {
       await createThread(kategori, isi);
-      await fetchThreads(); // Fetch all threads again after adding a new thread
+      await fetchThreads();
     } catch (error) {
       dispatch({ type: "CREATE_THREAD_FAILURE", payload: error });
     }
@@ -208,7 +208,7 @@ export const ThreadProvider: FC<ThreadProviderProps> = ({ children }) => {
       value={{ state, addThread, fetchThreadDetail, addComment }}
     >
       {children}
-      {state.loading && <div>Loading...</div>} {/* Loading indicator */}
+      {state.loading && <div>Loading...</div>}
     </ThreadContext.Provider>
   );
 };
