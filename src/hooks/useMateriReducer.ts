@@ -155,9 +155,14 @@ const useMateriReducer = (dataMateri: Materi[]) => {
 
   const handleFinish = async (materi_id: string) => {
     dispatch({ type: "SET_LOADING", payload: true });
-    await updateProgress(materi_id);
-    dispatch({ type: "SET_LOADING", payload: false });
-    dispatch({ type: "FINISH", payload: { materi_id, finished: true } });
+    try {
+      await updateProgress(materi_id);
+      dispatch({ type: "FINISH", payload: { materi_id, finished: true } });
+    } catch (error) {
+      console.error("Error finishing materi:", error);
+    } finally {
+      dispatch({ type: "SET_LOADING", payload: false });
+    }
   };
 
   return {

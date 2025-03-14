@@ -12,7 +12,6 @@ interface MateriListProps {
 const MateriList: React.FC<MateriListProps> = ({ dataMateri }) => {
   const materiDescRef = useRef<HTMLDivElement>(null);
 
-  // Sort dataMateri with "Case Study" at the end
   const sortedDataMateri = [
     ...dataMateri.filter((materi) => materi.jenis_materi !== "Study Case"),
     ...dataMateri.filter((materi) => materi.jenis_materi === "Study Case"),
@@ -26,7 +25,7 @@ const MateriList: React.FC<MateriListProps> = ({ dataMateri }) => {
     handlePrevious,
     handleFinish,
     materiRef,
-  } = useMateriReducer(sortedDataMateri); // Pass token
+  } = useMateriReducer(sortedDataMateri);
 
   const getEmbeddedURL = (url: string) => {
     const videoId = url.split("v=")[1]?.split("&")[0];

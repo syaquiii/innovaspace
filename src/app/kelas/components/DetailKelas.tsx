@@ -2,22 +2,49 @@ import { enrollUser } from "@/api/services/course";
 import { Button } from "@/components/ui/Button";
 import { Course } from "@/type/Tkelas";
 import Image from "next/image";
-import React, { FC } from "react";
+import React, { FC, useContext, useState } from "react";
+import { UserContext } from "@/context/UserContext";
+
+interface ApiError extends Error {
+  response?: {
+    data?: {
+      errors?: string;
+    };
+  };
+}
 
 type DetailKelas = {
   data: Course;
 };
 
 const DetailKelas: FC<DetailKelas> = ({ data }) => {
+  const { isUserEnrolled, userProfile } = useContext(UserContext);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const alreadyEnrolled = isUserEnrolled(data.kelas_id);
+
   const handleEnroll = async () => {
+    if (!userProfile) return;
+
     try {
       const enrollRequest = {
         kelas_id: data.kelas_id,
       };
       const response = await enrollUser(enrollRequest);
-      console.log("Enroll response:", response);
-    } catch (error) {
-      console.error("Error enrolling user:", error);
+      setSuccess(response.message);
+      setError(null); // Clear any previous errors
+    } catch (err) {
+      const error = err as ApiError;
+      console.error(
+        "Error enrolling user:",
+        error.response ? error.response.data : error.message
+      );
+      if (error.response && error.response.data && error.response.data.errors) {
+        setError(error.response.data.errors);
+      } else {
+        setError("An unexpected error occurred.");
+      }
+      setSuccess(null); // Clear any previous success message
     }
   };
 
@@ -36,13 +63,13 @@ const DetailKelas: FC<DetailKelas> = ({ data }) => {
             />
           </div>
           <div className="flex text-xs lg:text-sm gap-4 mt-4">
-            <span className="bg-normal-default  px-2 py-1 text-white rounded-lg">
+            <span className="bg-normal-default px-2 py-1 text-white rounded-lg">
               {data.kategori}
             </span>
-            <span className="bg-normal-default  px-2 py-1 text-white rounded-lg">
+            <span className="bg-normal-default px-2 py-1 text-white rounded-lg">
               {data.durasi} hours
             </span>
-            <span className="bg-normal-default  px-2 py-1 text-white rounded-lg">
+            <span className="bg-normal-default px-2 py-1 text-white rounded-lg">
               {data.tingkat_kesulitan}
             </span>
           </div>
@@ -54,9 +81,26 @@ const DetailKelas: FC<DetailKelas> = ({ data }) => {
               {data.deskripsi}
             </p>
           </div>
-          <Button className="w-full" size={"normal"} onClick={handleEnroll}>
-            Enroll
-          </Button>
+          {alreadyEnrolled ? (
+            <Button className="w-full" size={"normal"} disabled>
+              Sudah Terdaftar
+            </Button>
+          ) : (
+            <>
+              <Button className="w-full" size={"normal"} onClick={handleEnroll}>
+                Enroll
+              </Button>
+              {success && <div className="text-green-500 mt-2">{success}</div>}
+              {error && (
+                <div className="text-red-500 mt-2">
+                  {error ===
+                  "user must be a premium member to enroll this class"
+                    ? "You must be a premium member to enroll in this class."
+                    : error}
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>

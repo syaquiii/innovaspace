@@ -78,7 +78,6 @@ export const enrollUser = async (
     );
     return response.data;
   } catch (error) {
-    console.error("Error enrolling user:", error);
     throw error;
   }
 };
